@@ -1,0 +1,34 @@
+import {DeviceCommand} from '../base'
+import {cli} from 'cli-ux'
+
+export default class Info extends DeviceCommand {
+  static description = 'Add the supplied url to the queue'
+
+  static args = [
+    {name: 'device', required: true, description: 'Name or uuid of player',
+      parse: (input: string) => input.toLowerCase()},
+    {name: 'info', description: 'What do you want to load', required: true, options: ['attributes', 'media', 'position', 'queue', 'volume']},
+  ]
+
+  async run() {
+    const {args} = this.parse(Info)
+    const device = await this.getDevice(args.device)
+    switch (args.info) {
+    case 'attributes':
+      cli.styledJSON(await device.GetZoneAttributes())
+      break
+    case 'media':
+      this.log(JSON.stringify(await device.AVTransportService.GetMediaInfo(), null, 2))
+      break
+    case 'position':
+      cli.styledJSON(await device.AVTransportService.GetPositionInfo())
+      break
+    case 'queue':
+      cli.styledJSON(await device.GetQueue())
+      break
+    case 'volume':
+      this.log('Current volume %d', (await device.RenderingControlService.GetVolume({InstanceID: 0, Channel: 'Master'})).CurrentVolume)
+      break
+    }
+  }
+}
