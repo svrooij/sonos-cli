@@ -23,7 +23,7 @@ $ npm install -g @svrooij/sonos-cli
 $ sonos COMMAND
 running command...
 $ sonos (-v|--version|version)
-@svrooij/sonos-cli/0.0.0 darwin-x64 node-v12.13.1
+@svrooij/sonos-cli/0.0.1 darwin-x64 node-v12.13.1
 $ sonos --help [COMMAND]
 USAGE
   $ sonos COMMAND
@@ -52,7 +52,7 @@ ARGUMENTS
   INPUT    Optional input for command
 ```
 
-_See code: [src/commands/execute.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0/src/commands/execute.ts)_
+_See code: [src/commands/execute.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.1/src/commands/execute.ts)_
 
 ## `sonos help [COMMAND]`
 
@@ -84,7 +84,7 @@ ARGUMENTS
   INFO    (attributes|media|position|queue|volume) What do you want to load
 ```
 
-_See code: [src/commands/info.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0/src/commands/info.ts)_
+_See code: [src/commands/info.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.1/src/commands/info.ts)_
 
 ## `sonos play DEVICE URL`
 
@@ -103,7 +103,7 @@ OPTIONS
   --skip-queue
 ```
 
-_See code: [src/commands/play.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0/src/commands/play.ts)_
+_See code: [src/commands/play.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.1/src/commands/play.ts)_
 
 ## `sonos zones [FILE]`
 
@@ -126,7 +126,7 @@ OPTIONS
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
-_See code: [src/commands/zones.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0/src/commands/zones.ts)_
+_See code: [src/commands/zones.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.1/src/commands/zones.ts)_
 <!-- commandsstop -->
 
 [badge_sponsor]: https://img.shields.io/badge/Sponsor-on%20Github-red
