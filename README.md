@@ -8,7 +8,6 @@ Control your sonos players right from the console. This is not a production read
 [![travis][badge_travis]][link_travis]
 [![github issues][badge_issues]][link_issues]
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/@svrooij/sonos-cli.svg)](https://npmjs.org/package/@svrooij/sonos-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/@svrooij/sonos-cli.svg)](https://npmjs.org/package/@svrooij/sonos-cli)
 [![License](https://img.shields.io/npm/l/@svrooij/sonos-cli.svg)](https://github.com/svrooij/sonos-cli/blob/master/package.json)
 
@@ -23,7 +22,7 @@ $ npm install -g @svrooij/sonos-cli
 $ sonos COMMAND
 running command...
 $ sonos (-v|--version|version)
-@svrooij/sonos-cli/0.0.1 darwin-x64 node-v12.13.1
+@svrooij/sonos-cli/0.0.2 darwin-x64 node-v12.13.1
 $ sonos --help [COMMAND]
 USAGE
   $ sonos COMMAND
@@ -32,11 +31,78 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`sonos alarm:list`](#sonos-alarmlist)
+* [`sonos alarm:update ID`](#sonos-alarmupdate-id)
+* [`sonos control DEVICE CONTROL`](#sonos-control-device-control)
 * [`sonos execute DEVICE COMMAND [INPUT]`](#sonos-execute-device-command-input)
 * [`sonos help [COMMAND]`](#sonos-help-command)
-* [`sonos info DEVICE INFO`](#sonos-info-device-info)
+* [`sonos info DEVICE KIND`](#sonos-info-device-kind)
 * [`sonos play DEVICE URL`](#sonos-play-device-url)
 * [`sonos zones [FILE]`](#sonos-zones-file)
+
+## `sonos alarm:list`
+
+List your alarms
+
+```
+USAGE
+  $ sonos alarm:list
+
+OPTIONS
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
+```
+
+_See code: [src/commands/alarm/list.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/alarm/list.ts)_
+
+## `sonos alarm:update ID`
+
+Update a single alarm by ID
+
+```
+USAGE
+  $ sonos alarm:update ID
+
+ARGUMENTS
+  ID  Alarm ID you want to update
+
+OPTIONS
+  -h, --help                        show CLI help
+  --disable                         Disable the alarm?
+  --duration=duration               Duration as hh:mm:ss
+  --enable                          Enable the alarm?
+  --recurrence=DAILY|WEEKDAYS|ONCE  What is the recurrence of this alarm
+  --start=start                     Starttime as hh:mm:ss
+  --volume=volume                   New Volume
+```
+
+_See code: [src/commands/alarm/update.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/alarm/update.ts)_
+
+## `sonos control DEVICE CONTROL`
+
+describe the command here
+
+```
+USAGE
+  $ sonos control DEVICE CONTROL
+
+ARGUMENTS
+  DEVICE   Name or uuid of player
+  CONTROL  (play|pause|next|previous|toggle|stop|volumeup|volumedown) What do you want to control
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/control.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/control.ts)_
 
 ## `sonos execute DEVICE COMMAND [INPUT]`
 
@@ -52,7 +118,7 @@ ARGUMENTS
   INPUT    Optional input for command
 ```
 
-_See code: [src/commands/execute.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.1/src/commands/execute.ts)_
+_See code: [src/commands/execute.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/execute.ts)_
 
 ## `sonos help [COMMAND]`
 
@@ -71,20 +137,20 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
 
-## `sonos info DEVICE INFO`
+## `sonos info DEVICE KIND`
 
-Add the supplied url to the queue
+Show device data
 
 ```
 USAGE
-  $ sonos info DEVICE INFO
+  $ sonos info DEVICE KIND
 
 ARGUMENTS
   DEVICE  Name or uuid of player
-  INFO    (attributes|media|position|queue|volume) What do you want to load
+  KIND    (attributes|media|position|queue|volume) What do you want to load
 ```
 
-_See code: [src/commands/info.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.1/src/commands/info.ts)_
+_See code: [src/commands/info.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/info.ts)_
 
 ## `sonos play DEVICE URL`
 
@@ -103,7 +169,7 @@ OPTIONS
   --skip-queue
 ```
 
-_See code: [src/commands/play.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.1/src/commands/play.ts)_
+_See code: [src/commands/play.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/play.ts)_
 
 ## `sonos zones [FILE]`
 
@@ -126,7 +192,7 @@ OPTIONS
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
-_See code: [src/commands/zones.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.1/src/commands/zones.ts)_
+_See code: [src/commands/zones.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/zones.ts)_
 <!-- commandsstop -->
 
 [badge_sponsor]: https://img.shields.io/badge/Sponsor-on%20Github-red

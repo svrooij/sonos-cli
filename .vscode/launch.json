@@ -13,7 +13,7 @@
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/bin/run",
-      "args": ["info", "kantoor", "media"],
+      "args": ["alarm:update", "1711", "--enable"],
       "outFiles": [
         "${workspaceFolder}/lib/*.js"
       ]

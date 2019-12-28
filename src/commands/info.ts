@@ -2,18 +2,18 @@ import {DeviceCommand} from '../base'
 import {cli} from 'cli-ux'
 
 export default class Info extends DeviceCommand {
-  static description = 'Add the supplied url to the queue'
+  static description = 'Show device data'
 
   static args = [
     {name: 'device', required: true, description: 'Name or uuid of player',
       parse: (input: string) => input.toLowerCase()},
-    {name: 'info', description: 'What do you want to load', required: true, options: ['attributes', 'media', 'position', 'queue', 'volume']},
+    {name: 'kind', description: 'What do you want to load', required: true, options: ['attributes', 'media', 'position', 'queue', 'volume']},
   ]
 
   async run() {
     const {args} = this.parse(Info)
     const device = await this.getDevice(args.device)
-    switch (args.info) {
+    switch (args.kind) {
     case 'attributes':
       cli.styledJSON(await device.GetZoneAttributes())
       break
