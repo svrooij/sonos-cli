@@ -49,6 +49,7 @@ USAGE
   $ sonos alarm:list
 
 OPTIONS
+  -h, --help              show CLI help
   -x, --extended          show extra columns
   --columns=columns       only show provided columns (comma-separated)
   --csv                   output is csv format [alias: --output=csv]
@@ -97,9 +98,7 @@ ARGUMENTS
   CONTROL  (play|pause|next|previous|toggle|stop|volumeup|volumedown) What do you want to control
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -h, --help  show CLI help
 ```
 
 _See code: [src/commands/control.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/control.ts)_
@@ -116,6 +115,9 @@ ARGUMENTS
   DEVICE   Name or uuid of player
   COMMAND  command to call
   INPUT    Optional input for command
+
+OPTIONS
+  -h, --help  show CLI help
 ```
 
 _See code: [src/commands/execute.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/execute.ts)_
@@ -148,6 +150,9 @@ USAGE
 ARGUMENTS
   DEVICE  Name or uuid of player
   KIND    (attributes|media|position|queue|volume) What do you want to load
+
+OPTIONS
+  -h, --help  show CLI help
 ```
 
 _See code: [src/commands/info.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/info.ts)_
@@ -180,6 +185,7 @@ USAGE
   $ sonos zones [FILE]
 
 OPTIONS
+  -h, --help              show CLI help
   -x, --extended          show extra columns
   --columns=columns       only show provided columns (comma-separated)
   --csv                   output is csv format [alias: --output=csv]

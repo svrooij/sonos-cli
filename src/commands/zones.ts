@@ -11,6 +11,7 @@ export default class Zones extends Command {
   static description = 'Do device discovery'
 
   static flags = {
+    help: flags.help({char: 'h'}),
     save: flags.boolean(),
     ip: flags.string({description: 'Use IP instead of discovery'}),
     // flag with no value (-f, --force)

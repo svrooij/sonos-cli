@@ -1,8 +1,13 @@
 import {DeviceCommand} from '../base'
 import {cli} from 'cli-ux'
+import {flags} from '@oclif/command'
 
 export default class Info extends DeviceCommand {
   static description = 'Show device data'
+
+  static flags = {
+    help: flags.help({char: 'h'}),
+  }
 
   static args = [
     {name: 'device', required: true, description: 'Name or uuid of player',

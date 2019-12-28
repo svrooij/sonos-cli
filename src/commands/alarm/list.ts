@@ -1,4 +1,4 @@
-import {Command} from '@oclif/command'
+import {Command, flags} from '@oclif/command'
 import {cli} from 'cli-ux'
 import {SonosDeviceDiscovery, SonosDevice} from '@svrooij/sonos/lib'
 import {Options} from 'cli-ux/lib/action/base'
@@ -7,6 +7,7 @@ export default class AlarmList extends Command {
   static description = 'List your alarms'
 
   static flags = {
+    help: flags.help({char: 'h'}),
     ...cli.table.flags(),
   }
 

@@ -1,7 +1,12 @@
 import {DeviceCommand} from '../base'
+import {flags} from '@oclif/command'
 
 export default class Execute extends DeviceCommand {
   static description = 'Execute a command on the sonos'
+
+  static flags = {
+    help: flags.help({char: 'h'}),
+  }
 
   static args = [
     {
