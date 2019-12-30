@@ -1,7 +1,9 @@
 @svrooij/sonos-cli
 ==================
 
-Control your sonos players right from the console. This is not a production ready app, I'm just trying out a framework to create an cli really easy. You can however do a lot of stuff with this library.
+Control your sonos players right from the console. This cli is started as an experiment, so it may contain bugs. If you found some bugs, please [report][link_issues].
+
+Install `npm i -g @svrooij/sonos-cli` and start using, see below.
 
 [![Support me on Github][badge_sponsor]][link_sponsor]
 [![npm][badge_npm]][link_npm]
