@@ -3,6 +3,10 @@ node_js:
   - 10
   - 13
 
+branches:
+  only:
+    - master
+
 cache: npm
 
 script:
