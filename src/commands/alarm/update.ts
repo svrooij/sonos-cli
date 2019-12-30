@@ -33,7 +33,7 @@ export default class AlarmUpdate extends Command {
     if (flags.enable === true) enabled = true
     else if (flags.disable === true) enabled = false
 
-    if (Object.keys(args).length < 2) {
+    if (Object.keys(flags).length === 0) {
       this.error('You need at least one property to update\r\nsonos alarm:update --help', {exit: 10})
     }
 
