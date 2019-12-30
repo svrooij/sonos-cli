@@ -8,6 +8,7 @@ export default class AlarmList extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
+    'disable-all': flags.boolean({hidden: true}),
     ...cli.table.flags(),
   }
 
@@ -19,6 +20,14 @@ export default class AlarmList extends Command {
     const device = new SonosDevice(config.host, config.port)
 
     const alarms = await device.AlarmList()
+
+    if (flags['disable-all'] === true) {
+      alarms
+      .filter(a => a.Enabled === true)
+      .forEach(async a => {
+        await device.AlarmPatch({ID: a.ID, Enabled: false})
+      })
+    }
 
     cli.table(alarms, {
       ID: {},

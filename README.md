@@ -9,9 +9,11 @@ Install `npm i -g @svrooij/sonos-cli` and start using, see below.
 [![npm][badge_npm]][link_npm]
 [![travis][badge_travis]][link_travis]
 [![github issues][badge_issues]][link_issues]
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Downloads/week](https://img.shields.io/npm/dw/@svrooij/sonos-cli.svg)](https://npmjs.org/package/@svrooij/sonos-cli)
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![License](https://img.shields.io/npm/l/@svrooij/sonos-cli.svg)](https://github.com/svrooij/sonos-cli/blob/master/package.json)
+
+This sonos cli, is just a cli wrapper around the [node-sonos-ts](https://github.com/svrooij/node-sonos-ts) library. I could use some support in both :wink:. If you like this library please tell me on [twitter](https://twitter.com/svrooij), or start [sponsoring][link_sponsor] me.
 
 <!-- toc -->
 * [Usage](#usage)
@@ -202,6 +204,18 @@ OPTIONS
 
 _See code: [src/commands/zones.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/zones.ts)_
 <!-- commandsstop -->
+
+## Development
+
+This library is written in TypeScript, that means you'll need to compile it before using. This is done automatically when packaging, but you can also run `npm run prepack`. Starting this library from the repository is done by `./bin/run [command] ...`.
+
+Tests aren't implemented everywhere, if you feel like it send me a pull request.
+
+### Oclif
+
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
+
+[Oclif](https://oclif.io/) is a cli framework created by the guys (and girls) from heroku. When starting this library it was the want that seems to have the most featured I wanted for a cli framework. This wasn't a thourogh research, I just picked the one I liked.
 
 [badge_sponsor]: https://img.shields.io/badge/Sponsor-on%20Github-red
 [badge_issues]: https://img.shields.io/github/issues/svrooij/sonos-cli
