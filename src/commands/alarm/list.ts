@@ -8,6 +8,7 @@ export default class AlarmList extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
+    ip: flags.string({description: 'Use IP instead of discovery'}),
     'disable-all': flags.boolean({hidden: true}),
     ...cli.table.flags(),
   }
@@ -16,16 +17,16 @@ export default class AlarmList extends Command {
     const {flags} = this.parse(AlarmList)
 
     const discovery = new SonosDeviceDiscovery()
-    const config = await discovery.SearchOne(10)
+    const config = (flags.ip === undefined) ? await discovery.SearchOne(10) : {host: flags.ip, port: 1400}
     const device = new SonosDevice(config.host, config.port)
 
-    const alarms = await device.AlarmList()
+    const alarms = await device.AlarmClockService.ListAndParseAlarms()
 
     if (flags['disable-all'] === true) {
       alarms
       .filter(a => a.Enabled === true)
       .forEach(async a => {
-        await device.AlarmPatch({ID: a.ID, Enabled: false})
+        await device.AlarmClockService.PatchAlarm({ID: a.ID, Enabled: false})
       })
     }
 
