@@ -1,8 +1,8 @@
 {
   "name": "@svrooij/sonos-cli",
-  "description": "Control your sonos players right from the console.",
+  "description": "Control your sonos players from the console, for the console addicts like me.\r\nYou can control basic stuff, and you can execute every command from the used sonos library at https://svrooij.github.io/node-sonos-ts/sonos-device.\r\nIf you like this app be sure to checkout https://github.com/sponsors/svrooij",
   "version": "0.0.0-development",
-  "author": "Stephan van Rooij",
+  "author": "Stephan van Rooij <github@svrooij.nl>",
   "bin": {
     "sonos": "./bin/run"
   },
@@ -11,29 +11,29 @@
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.14.0",
     "@oclif/plugin-help": "^2.2.3",
-    "@svrooij/sonos": "^1.2.0",
-    "cli-ux": "^5.4.4",
+    "@svrooij/sonos": "^2.0.1",
+    "cli-ux": "^5.4.5",
     "fs-extra": "^8.1.0",
-    "tslib": "^1.10.0"
+    "tslib": "^1.11.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.5",
-    "@types/chai": "^4.2.9",
+    "@types/chai": "^4.2.11",
     "@types/debug": "^4.1.5",
-    "@types/fs-extra": "^8.0.1",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^13.7.1",
+    "@types/fs-extra": "^8.1.0",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.9.3",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-config-oclif": "^3.1.0",
     "eslint-config-oclif-typescript": "^0.1.0",
-    "globby": "^10.0.1",
-    "mocha": "^6.2.2",
-    "nyc": "^14.1.1",
-    "ts-node": "^8.5.4",
+    "globby": "^11.0.0",
+    "mocha": "^7.1.1",
+    "nyc": "^15.0.0",
+    "ts-node": "^8.8.1",
     "typescript": "^3.7.4",
-    "semantic-release": "^15.14.0"
+    "semantic-release": "^17.0.4"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -46,7 +46,11 @@
   ],
   "homepage": "https://github.com/svrooij/sonos-cli",
   "keywords": [
-    "oclif"
+    "sonos",
+    "cli",
+    "homeautomation",
+    "music",
+    "speakers"
   ],
   "license": "MIT",
   "main": "lib/index.js",
@@ -71,5 +75,9 @@
     "alarm": {
       "description": "Manage your alarms"
     }
+  },
+  "funding": {
+    "type": "Github sponsor",
+    "url": "https://github.com/sponsors/svrooij"
   }
 }

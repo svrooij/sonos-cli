@@ -44,5 +44,6 @@ export default class AlarmList extends Command {
       printLine: this.log,
       ...flags,
     } as Options)
+    this.exit()
   }
 }

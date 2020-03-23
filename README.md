@@ -26,7 +26,7 @@ $ npm install -g @svrooij/sonos-cli
 $ sonos COMMAND
 running command...
 $ sonos (-v|--version|version)
-@svrooij/sonos-cli/0.0.2 darwin-x64 node-v12.13.1
+@svrooij/sonos-cli/0.0.0-development darwin-x64 node-v12.15.0
 $ sonos --help [COMMAND]
 USAGE
   $ sonos COMMAND
@@ -58,13 +58,14 @@ OPTIONS
   --columns=columns       only show provided columns (comma-separated)
   --csv                   output is csv format [alias: --output=csv]
   --filter=filter         filter property by partial string matching, ex: name=foo
+  --ip=ip                 Use IP instead of discovery
   --no-header             hide table header from output
   --no-truncate           do not truncate output to fit screen
   --output=csv|json|yaml  output in a more machine friendly format
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
-_See code: [src/commands/alarm/list.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/alarm/list.ts)_
+_See code: [src/commands/alarm/list.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/alarm/list.ts)_
 
 ## `sonos alarm:update ID`
 
@@ -87,7 +88,7 @@ OPTIONS
   --volume=volume                   New Volume
 ```
 
-_See code: [src/commands/alarm/update.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/alarm/update.ts)_
+_See code: [src/commands/alarm/update.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/alarm/update.ts)_
 
 ## `sonos control DEVICE CONTROL`
 
@@ -105,11 +106,11 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/control.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/control.ts)_
+_See code: [src/commands/control.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/control.ts)_
 
 ## `sonos execute DEVICE COMMAND [INPUT]`
 
-Execute a command on the sonos
+Execute all available commands on the sonos library. See https://svrooij.github.io/node-sonos-ts/sonos-device for available commands
 
 ```
 USAGE
@@ -117,14 +118,18 @@ USAGE
 
 ARGUMENTS
   DEVICE   Name or uuid of player
-  COMMAND  command to call
+  COMMAND  command to call, eg. AVTransportService.Next
   INPUT    Optional input for command
 
 OPTIONS
   -h, --help  show CLI help
+
+EXAMPLES
+  sonos execute {device} AVTransportService.Next
+  sonos execute Bedroom AVTransportService.ConfigureSleepTimer '{"InstanceID": 0, "NewSleepTimerDuration": "00:04:00"}'
 ```
 
-_See code: [src/commands/execute.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/execute.ts)_
+_See code: [src/commands/execute.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/execute.ts)_
 
 ## `sonos help [COMMAND]`
 
@@ -159,7 +164,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/info.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/info.ts)_
+_See code: [src/commands/info.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/info.ts)_
 
 ## `sonos play DEVICE URL`
 
@@ -178,7 +183,7 @@ OPTIONS
   --skip-queue
 ```
 
-_See code: [src/commands/play.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/play.ts)_
+_See code: [src/commands/play.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/play.ts)_
 
 ## `sonos zones [FILE]`
 
@@ -202,7 +207,7 @@ OPTIONS
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
-_See code: [src/commands/zones.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.2/src/commands/zones.ts)_
+_See code: [src/commands/zones.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/zones.ts)_
 <!-- commandsstop -->
 
 ## Development
