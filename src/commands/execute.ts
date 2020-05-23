@@ -7,6 +7,9 @@ export default class Execute extends DeviceCommand {
 
   static examples = [
     'sonos execute {device} AVTransportService.Next',
+    'sonos execute {device} SwitchToLineIn',
+    'sonos execute {device} SwitchToQueue',
+    'sonos execute {device} SwitchToTV',
     'sonos execute Bedroom AVTransportService.ConfigureSleepTimer \'{"InstanceID": 0, "NewSleepTimerDuration": "00:04:00"}\'',
   ]
 
