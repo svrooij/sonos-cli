@@ -34,11 +34,11 @@ export default class Zones extends Command {
 
     cli.table(manager.Devices, {
       Name: {},
-      uuid: {header: 'Zone ID'},
+      Uuid: {header: 'Zone ID'},
       host: {header: 'IP', extended: true},
       GroupName: {},
       Coordinator: {header: 'Coordinator', extended: true, get: d => d.Coordinator.Name},
-      CoordinatorId: {header: 'Coordinator ID', extended: true, get: d => d.Coordinator.uuid},
+      CoordinatorId: {header: 'Coordinator ID', extended: true, get: d => d.Coordinator.Uuid},
     }, {
       printLine: this.log,
       ...flags,
