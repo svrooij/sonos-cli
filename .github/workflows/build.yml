@@ -24,9 +24,9 @@ jobs:
     - name: Install depencencies
       run: npm ci
     - name: Run version command
-      run: ./bin run --version
+      run: ./bin/run --version
     - name: Run help command
-      run: ./bin run --help
+      run: ./bin/run --help
     - name: Run tests
       run: npm run test
     - uses: svrooij/secret-gate-action@v1
