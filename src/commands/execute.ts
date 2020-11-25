@@ -15,12 +15,12 @@ export default class Execute extends DeviceCommand {
 
   static flags = {
     help: flags.help({char: 'h'}),
+    ...DeviceCommand.baseFlags()
   }
 
   static args = [
     {
       name: 'device', required: true, description: 'Name or uuid of player',
-      parse: (input: string) => input.toLowerCase(),
     },
     {
       name: 'command', required: true, description: 'command to call, eg. AVTransportService.Next',
@@ -32,7 +32,7 @@ export default class Execute extends DeviceCommand {
 
   async run() {
     const {args} = this.parse(Execute)
-    const device = await this.getDevice(args.device)
+    const device = await this.device(flags, args.device)
     const num = Number(args.input)
     const commandArgs = isNaN(num) ? args.input : num
     const result = await device.ExecuteCommand(args.command, commandArgs)
@@ -40,7 +40,7 @@ export default class Execute extends DeviceCommand {
       this.log('Executed %s success:%s', args.command, result)
     } else {
       this.log('Executed %s result:', args.command)
-      cli.styledJSON(await device.GetQueue())
+      cli.styledJSON(result)
     }
   }
 }

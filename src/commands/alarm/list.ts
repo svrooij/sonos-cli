@@ -2,23 +2,23 @@ import {Command, flags} from '@oclif/command'
 import {cli} from 'cli-ux'
 import {SonosDeviceDiscovery, SonosDevice} from '@svrooij/sonos/lib'
 import {Options} from 'cli-ux/lib/action/base'
+import { DeviceCommand } from '../../base'
 
-export default class AlarmList extends Command {
+export default class AlarmList extends DeviceCommand {
   static description = 'List your alarms'
 
   static flags = {
     help: flags.help({char: 'h'}),
-    ip: flags.string({description: 'Use IP instead of discovery'}),
     'disable-all': flags.boolean({hidden: true}),
+    ...DeviceCommand.baseFlags(),
     ...cli.table.flags(),
   }
 
   async run() {
-    const {flags} = this.parse(AlarmList)
+    const { flags } = this.parse(AlarmList)
 
-    const discovery = new SonosDeviceDiscovery()
-    const config = (flags.ip === undefined) ? await discovery.SearchOne(10) : {host: flags.ip, port: 1400}
-    const device = new SonosDevice(config.host, config.port)
+    
+    const device = await super.device(flags);
 
     const alarms = await device.AlarmClockService.ListAndParseAlarms()
 
@@ -32,13 +32,13 @@ export default class AlarmList extends Command {
 
     cli.table(alarms, {
       ID: {},
-      StartLocalTime: {header: 'Start at'},
-      RoomUUID: {header: 'Room'},
-      Duration: {extended: true},
+      StartLocalTime: { header: 'Start at' },
+      RoomUUID: { header: 'Room' },
+      Duration: { extended: true },
       Enabled: {},
       Volume: {},
       Recurrence: {},
-      ProgramURI: {header: 'Sound url', extended: true},
+      ProgramURI: { header: 'Sound url', extended: true },
       // ProgramMetaData: {header: 'Sound metadata', extended: true},
     }, {
       printLine: this.log,

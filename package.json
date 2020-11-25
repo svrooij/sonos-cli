@@ -72,6 +72,9 @@
   "topics": {
     "alarm": {
       "description": "Manage your alarms"
+    },
+    "music": {
+      "description": "Manage external music services"
     }
   },
   "funding": {

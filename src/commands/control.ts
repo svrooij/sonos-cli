@@ -6,18 +6,18 @@ export default class Control extends DeviceCommand {
 
   static flags = {
     help: flags.help({char: 'h'}),
+    ...DeviceCommand.baseFlags()
   }
 
   static args = [
-    {name: 'device', required: true, description: 'Name or uuid of player',
-      parse: (input: string) => input.toLowerCase()},
+    {name: 'device', required: true, description: 'Name or uuid of player' },
     {name: 'control', required: true, description: 'What do you want to control',
       options: ['play', 'pause', 'next', 'previous', 'toggle', 'stop', 'volumeup', 'volumedown']},
   ]
 
   async run() {
-    const {args} = this.parse(Control)
-    const device = await this.getDevice(args.device)
+    const { args, flags } = this.parse(Control)
+    const device = await this.device(flags, args.device)
 
     switch (args.control) {
     case 'play':

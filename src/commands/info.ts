@@ -7,17 +7,17 @@ export default class Info extends DeviceCommand {
 
   static flags = {
     help: flags.help({char: 'h'}),
+    ...DeviceCommand.baseFlags()
   }
 
   static args = [
-    {name: 'device', required: true, description: 'Name or uuid of player',
-      parse: (input: string) => input.toLowerCase()},
+    {name: 'device', required: true, description: 'Name or uuid of player' },
     {name: 'kind', description: 'What do you want to load', required: true, options: ['attributes', 'media', 'position', 'queue', 'volume']},
   ]
 
   async run() {
     const {args} = this.parse(Info)
-    const device = await this.getDevice(args.device)
+    const device = await this.device(flags, args.device)
     switch (args.kind) {
     case 'attributes':
       cli.styledJSON(await device.GetZoneAttributes())
