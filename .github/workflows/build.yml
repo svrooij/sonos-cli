@@ -1,0 +1,44 @@
+name: Run tests and publish
+
+on:
+  push:
+    branches:
+      - master
+      - beta
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Use node 14
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14
+    - name: Install depencencies
+      run: npm ci
+    - name: Run version command
+      run: ./bin/run --version
+    - name: Run help command
+      run: ./bin/run --help
+    - name: Run tests
+      run: npm run test
+    - uses: svrooij/secret-gate-action@v1
+      id: mygate
+      with:
+        inputsToCheck: 'NPM_TOKEN'
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: Semantic Release
+      uses: cycjimmy/semantic-release-action@v2
+      if: steps.mygate.outputs.inputsChecked == 'true'
+      id: semantic
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

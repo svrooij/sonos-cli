@@ -1,24 +1,24 @@
-import {DeviceCommand} from '../base'
-import {flags} from '@oclif/command'
+import Command, {flags} from '@oclif/command'
+import SonosCommandHelper from '../helpers/sonos-command-helper'
 
-export default class Play extends DeviceCommand {
+export default class Play extends Command {
   static description = 'Add the supplied url to the queue'
 
   static flags = {
     help: flags.help({char: 'h'}),
     // flag with no value (-f, --force)
     'skip-queue': flags.boolean(),
+    ...SonosCommandHelper.baseFlags(),
   }
 
   static args = [
-    {name: 'device', required: true, description: 'Name or uuid of player',
-      parse: (input: string) => input.toLowerCase()},
+    {name: 'device', required: true, description: 'Name or uuid of player'},
     {name: 'url', description: 'The url to play', required: true},
   ]
 
   async run() {
     const {args, flags} = this.parse(Play)
-    const device = await this.getDevice(args.device)
+    const device = await SonosCommandHelper.device(this, flags, args.device)
 
     if (flags['skip-queue']) {
       this.log('SetAVTransportURI: %s', args.url)

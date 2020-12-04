@@ -4,6 +4,7 @@
     "oclif-typescript"
   ],
   "rules": {
-    "new-cap":"off"
+    "new-cap":"off",
+    "no-await-in-loop": "warn"
   }
 }

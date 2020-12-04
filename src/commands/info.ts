@@ -1,23 +1,23 @@
-import {DeviceCommand} from '../base'
 import {cli} from 'cli-ux'
-import {flags} from '@oclif/command'
+import Command, {flags} from '@oclif/command'
+import SonosCommandHelper from '../helpers/sonos-command-helper'
 
-export default class Info extends DeviceCommand {
+export default class Info extends Command {
   static description = 'Show device data'
 
   static flags = {
     help: flags.help({char: 'h'}),
+    ...SonosCommandHelper.baseFlags(),
   }
 
   static args = [
-    {name: 'device', required: true, description: 'Name or uuid of player',
-      parse: (input: string) => input.toLowerCase()},
+    {name: 'device', required: true, description: 'Name or uuid of player'},
     {name: 'kind', description: 'What do you want to load', required: true, options: ['attributes', 'media', 'position', 'queue', 'volume']},
   ]
 
   async run() {
     const {args} = this.parse(Info)
-    const device = await this.getDevice(args.device)
+    const device = await SonosCommandHelper.device(this, flags, args.device)
     switch (args.kind) {
     case 'attributes':
       cli.styledJSON(await device.GetZoneAttributes())

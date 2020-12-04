@@ -1,24 +1,22 @@
 import {Command, flags} from '@oclif/command'
 import {cli} from 'cli-ux'
-import {SonosDeviceDiscovery, SonosDevice} from '@svrooij/sonos/lib'
 import {Options} from 'cli-ux/lib/action/base'
+import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
 export default class AlarmList extends Command {
   static description = 'List your alarms'
 
   static flags = {
     help: flags.help({char: 'h'}),
-    ip: flags.string({description: 'Use IP instead of discovery'}),
     'disable-all': flags.boolean({hidden: true}),
+    ...SonosCommandHelper.baseFlags(),
     ...cli.table.flags(),
   }
 
   async run() {
     const {flags} = this.parse(AlarmList)
 
-    const discovery = new SonosDeviceDiscovery()
-    const config = (flags.ip === undefined) ? await discovery.SearchOne(10) : {host: flags.ip, port: 1400}
-    const device = new SonosDevice(config.host, config.port)
+    const device = await SonosCommandHelper.device(this, flags)
 
     const alarms = await device.AlarmClockService.ListAndParseAlarms()
 
