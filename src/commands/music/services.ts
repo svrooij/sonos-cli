@@ -2,15 +2,15 @@ import {Command, flags} from '@oclif/command'
 import { SonosDevice, SonosManager } from '@svrooij/sonos'
 import { MusicService } from '@svrooij/sonos/lib/services'
 import { cli } from 'cli-ux'
-import { DeviceCommand } from '../../base'
+import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
-export default class MusicServices extends DeviceCommand {
+export default class MusicServices extends Command {
   static description = 'Show all music services!'
 
   static flags = {
     help: flags.help({char: 'h'}),
     subscribed: flags.boolean({description: 'Only show services where you logged-in to'}),
-    ...DeviceCommand.baseFlags(),
+    ...SonosCommandHelper.baseFlags(),
     ...cli.table.flags(),
   }
 
@@ -19,7 +19,7 @@ export default class MusicServices extends DeviceCommand {
   async run() {
     const {args, flags} = this.parse(MusicServices)
 
-    const device = await super.device(flags);    
+    const device = await SonosCommandHelper.device(this, flags);    
     cli.action.start('Get music services');
     const musicServices = flags.subscribed 
     ? await device.MusicServicesSubscribed()

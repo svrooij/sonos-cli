@@ -1,9 +1,9 @@
 import {Command, flags} from '@oclif/command'
 import {SonosDeviceDiscovery, SonosDevice} from '@svrooij/sonos/lib'
 import {PatchAlarm} from '@svrooij/sonos/lib/models'
-import { DeviceCommand } from '../../base'
+import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
-export default class AlarmUpdate extends DeviceCommand {
+export default class AlarmUpdate extends Command {
   static description = 'Update a single alarm by ID'
 
   static flags = {
@@ -14,7 +14,7 @@ export default class AlarmUpdate extends DeviceCommand {
     start: flags.string({description: 'Starttime as hh:mm:ss'}),
     duration: flags.string({description: 'Duration as hh:mm:ss'}),
     recurrence: flags.string({description: 'What is the recurrence of this alarm', options: ['DAILY', 'WEEKDAYS', 'ONCE']}),
-    ...DeviceCommand.baseFlags()
+    ...SonosCommandHelper.baseFlags()
   }
 
   static args = [{name: 'id',  description: 'Alarm ID you want to update', required: true}]
@@ -27,7 +27,7 @@ export default class AlarmUpdate extends DeviceCommand {
       this.error('ID not a valid value', {exit: 4})
     }
 
-    const device = await super.device(flags);
+    const device = await SonosCommandHelper.device(this, flags);
 
     let enabled: boolean | undefined
     if (flags.enable === true) enabled = true

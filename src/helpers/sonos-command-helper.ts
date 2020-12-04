@@ -1,12 +1,10 @@
-import {Command} from '@oclif/command'
-import {DeviceConfig} from './models/device-config'
+import {DeviceConfig} from '../models/device-config'
 import {SonosDevice, SonosManager} from '@svrooij/sonos'
-import { flags as F } from '@oclif/command';
+import Command, { flags as F } from '@oclif/command';
 import { cli } from 'cli-ux'
 import * as fs from 'fs-extra'
 import * as path from 'path'
-import DeviceDescription from '@svrooij/sonos/lib/models/device-description';
-import { string } from '@oclif/command/lib/flags';
+
 declare global {
   interface String {
     equals(compareTo: string): boolean;
@@ -16,6 +14,7 @@ declare global {
 String.prototype.equals = function(compareTo: string): boolean {
   return this.localeCompare(compareTo, undefined, { sensitivity: 'base' }) === 0;
 }
+
 export interface Options {
   [key: string]: any;
   ip?: string;
@@ -23,10 +22,9 @@ export interface Options {
   'save-zones'?: boolean;
 }
 
-export abstract class DeviceCommand extends Command {
-
-  async device(options: Options, device: string | undefined = undefined): Promise<SonosDevice> {
-    const filename = path.join(this.config.dataDir.replace(/@/, ''), 'devices.json');
+export default class SonosCommandHelper {
+  static async device(command: Command, options: Options, device: string | undefined = undefined): Promise<SonosDevice> {
+    const filename = path.join(command.config.dataDir.replace(/@/, ''), 'devices.json');
     let devices: DeviceConfig[] | undefined;
     if (options["refresh-zones"] === true || !await fs.pathExists(filename)) {
       cli.action.start('Loading devices');
@@ -41,12 +39,12 @@ export abstract class DeviceCommand extends Command {
       }
 
       if (manager.Devices.length == 0) {
-        return this.error('No sonos device found, specify a sonos ip with \'--ip\'');
+        return command.error('No sonos device found, specify a sonos ip with \'--ip\'');
       }
       cli.action.stop();
       manager.CancelSubscription();
       if (options['save-zones'] === true) {
-        const dir = this.config.dataDir.replace(/@/, '')
+        const dir = command.config.dataDir.replace(/@/, '')
         devices = manager.Devices.map(d => {
           return {name: d.Name, host: d.Host, uuid: d.Uuid} as DeviceConfig
         })
@@ -61,12 +59,11 @@ export abstract class DeviceCommand extends Command {
     const config = device ? devices?.find(d => d.name.equals(device) || d.uuid.equals(device)) : devices?.[0];
 
     if(config === undefined) {
-      return this.error(`Sonos device ${device} not found.`);
+      return command.error(`Sonos device ${device} not found.`);
     }
 
     return new SonosDevice(config.host, 1400, config.uuid, config.name);
   }
-
   static baseFlags() {
     return {
       ip: F.string({ description: 'Load devices from IP instead of Service Discovery', hidden: true }),
@@ -75,5 +72,3 @@ export abstract class DeviceCommand extends Command {
     };
   }
 }
-
-

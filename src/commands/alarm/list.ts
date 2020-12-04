@@ -1,16 +1,15 @@
 import {Command, flags} from '@oclif/command'
 import {cli} from 'cli-ux'
-import {SonosDeviceDiscovery, SonosDevice} from '@svrooij/sonos/lib'
 import {Options} from 'cli-ux/lib/action/base'
-import { DeviceCommand } from '../../base'
+import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
-export default class AlarmList extends DeviceCommand {
+export default class AlarmList extends Command {
   static description = 'List your alarms'
 
   static flags = {
     help: flags.help({char: 'h'}),
     'disable-all': flags.boolean({hidden: true}),
-    ...DeviceCommand.baseFlags(),
+    ...SonosCommandHelper.baseFlags(),
     ...cli.table.flags(),
   }
 
@@ -18,7 +17,7 @@ export default class AlarmList extends DeviceCommand {
     const { flags } = this.parse(AlarmList)
 
     
-    const device = await super.device(flags);
+    const device = await SonosCommandHelper.device(this, flags);
 
     const alarms = await device.AlarmClockService.ListAndParseAlarms()
 

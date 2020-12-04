@@ -5,15 +5,20 @@ Control your sonos players right from the console. This cli is started as an exp
 
 Install `npm i -g @svrooij/sonos-cli` and start using, see below.
 
-[![Support me on Github][badge_sponsor]][link_sponsor]
+[![Sonos cli][badge_sonos-cli]][link_sonos-cli]
 [![npm][badge_npm]][link_npm]
-[![travis][badge_travis]][link_travis]
-[![github issues][badge_issues]][link_issues]
-[![Downloads/week](https://img.shields.io/npm/dw/@svrooij/sonos-cli.svg)](https://npmjs.org/package/@svrooij/sonos-cli)
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![License](https://img.shields.io/npm/l/@svrooij/sonos-cli.svg)](https://github.com/svrooij/sonos-cli/blob/master/package.json)
+[![Sonos api documentation][badge_sonos-docs]][link_sonos-docs]
+[![Sonos typescript this library][badge_sonos-typescript]][link_sonos-typescript]
+[![Sonos2mqtt][badge_sonos-mqtt]][link_sonos-mqtt]
+[![Join us on Discord][badge_discord]][link_discord]
 
-This sonos cli, is just a cli wrapper around the [node-sonos-ts](https://github.com/svrooij/node-sonos-ts) library. I could use some support in both :wink:. If you like this library please tell me on [twitter](https://twitter.com/svrooij), or start [sponsoring][link_sponsor] me.
+[![github issues][badge_issues]][link_issues]
+[![Downloads/week](https://img.shields.io/npm/dw/@svrooij/sonos-cli.svg?style=flat-square)](https://npmjs.org/package/@svrooij/sonos-cli)
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg?style=flat-square)](https://oclif.io)
+[![License](https://img.shields.io/npm/l/@svrooij/sonos-cli.svg?style=flat-square)](https://github.com/svrooij/sonos-cli/blob/master/package.json)
+[![Support me on Github][badge_sponsor]][link_sponsor]
+
+This sonos cli, is just a cli wrapper around the [sonos-ts](https://github.com/svrooij/node-sonos-ts) library. I could use some support in both :wink:. If you like this library please tell me on [twitter](https://twitter.com/svrooij), or start [sponsoring][link_sponsor] me.
 
 <!-- toc -->
 * [Usage](#usage)
@@ -26,7 +31,7 @@ $ npm install -g @svrooij/sonos-cli
 $ sonos COMMAND
 running command...
 $ sonos (-v|--version|version)
-@svrooij/sonos-cli/0.0.0-development darwin-x64 node-v12.15.0
+@svrooij/sonos-cli/0.0.0-development win32-x64 node-v12.16.3
 $ sonos --help [COMMAND]
 USAGE
   $ sonos COMMAND
@@ -41,12 +46,13 @@ USAGE
 * [`sonos execute DEVICE COMMAND [INPUT]`](#sonos-execute-device-command-input)
 * [`sonos help [COMMAND]`](#sonos-help-command)
 * [`sonos info DEVICE KIND`](#sonos-info-device-kind)
+* [`sonos music:browse`](#sonos-musicbrowse)
+* [`sonos music:login`](#sonos-musiclogin)
+* [`sonos music:services`](#sonos-musicservices)
 * [`sonos play DEVICE URL`](#sonos-play-device-url)
 * [`sonos zones [FILE]`](#sonos-zones-file)
 
 ## `sonos alarm:list`
-
-List your alarms
 
 ```
 USAGE
@@ -58,7 +64,6 @@ OPTIONS
   --columns=columns       only show provided columns (comma-separated)
   --csv                   output is csv format [alias: --output=csv]
   --filter=filter         filter property by partial string matching, ex: name=foo
-  --ip=ip                 Use IP instead of discovery
   --no-header             hide table header from output
   --no-truncate           do not truncate output to fit screen
   --output=csv|json|yaml  output in a more machine friendly format
@@ -68,8 +73,6 @@ OPTIONS
 _See code: [src/commands/alarm/list.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/alarm/list.ts)_
 
 ## `sonos alarm:update ID`
-
-Update a single alarm by ID
 
 ```
 USAGE
@@ -92,8 +95,6 @@ _See code: [src/commands/alarm/update.ts](https://github.com/svrooij/sonos-cli/b
 
 ## `sonos control DEVICE CONTROL`
 
-describe the command here
-
 ```
 USAGE
   $ sonos control DEVICE CONTROL
@@ -110,8 +111,6 @@ _See code: [src/commands/control.ts](https://github.com/svrooij/sonos-cli/blob/v
 
 ## `sonos execute DEVICE COMMAND [INPUT]`
 
-Execute all available commands on the sonos library. See https://svrooij.github.io/node-sonos-ts/sonos-device for available commands
-
 ```
 USAGE
   $ sonos execute DEVICE COMMAND [INPUT]
@@ -126,14 +125,15 @@ OPTIONS
 
 EXAMPLES
   sonos execute {device} AVTransportService.Next
+  sonos execute {device} SwitchToLineIn
+  sonos execute {device} SwitchToQueue
+  sonos execute {device} SwitchToTV
   sonos execute Bedroom AVTransportService.ConfigureSleepTimer '{"InstanceID": 0, "NewSleepTimerDuration": "00:04:00"}'
 ```
 
 _See code: [src/commands/execute.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/execute.ts)_
 
 ## `sonos help [COMMAND]`
-
-display help for sonos
 
 ```
 USAGE
@@ -146,11 +146,9 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
 ## `sonos info DEVICE KIND`
-
-Show device data
 
 ```
 USAGE
@@ -166,9 +164,56 @@ OPTIONS
 
 _See code: [src/commands/info.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/info.ts)_
 
-## `sonos play DEVICE URL`
+## `sonos music:browse`
 
-Add the supplied url to the queue
+```
+USAGE
+  $ sonos music:browse
+
+OPTIONS
+  -h, --help         show CLI help
+  --count=count      [default: 10]
+  --root=root        [default: root] Start browsing at this tag.
+  --service=service  Music Service ID
+```
+
+_See code: [src/commands/music/browse.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/music/browse.ts)_
+
+## `sonos music:login`
+
+```
+USAGE
+  $ sonos music:login
+
+OPTIONS
+  -h, --help         show CLI help
+  --service=service  Music Service ID
+```
+
+_See code: [src/commands/music/login.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/music/login.ts)_
+
+## `sonos music:services`
+
+```
+USAGE
+  $ sonos music:services
+
+OPTIONS
+  -h, --help              show CLI help
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
+  --subscribed            Only show services where you logged-in to
+```
+
+_See code: [src/commands/music/services.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/music/services.ts)_
+
+## `sonos play DEVICE URL`
 
 ```
 USAGE
@@ -186,8 +231,6 @@ OPTIONS
 _See code: [src/commands/play.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/play.ts)_
 
 ## `sonos zones [FILE]`
-
-Do device discovery
 
 ```
 USAGE
@@ -222,12 +265,21 @@ Tests aren't implemented everywhere, if you feel like it send me a pull request.
 
 [Oclif](https://oclif.io/) is a cli framework created by the guys (and girls) from heroku. When starting this library it was the want that seems to have the most featured I wanted for a cli framework. This wasn't a thourogh research, I just picked the one I liked.
 
-[badge_sponsor]: https://img.shields.io/badge/Sponsor-on%20Github-red
-[badge_issues]: https://img.shields.io/github/issues/svrooij/sonos-cli
-[badge_npm]: https://img.shields.io/npm/v/@svrooij/sonos-cli
-[badge_travis]: https://img.shields.io/travis/svrooij/sonos-cli
+[badge_discord]: https://img.shields.io/discord/782374564054564875?style=flat-square
+[badge_issues]: https://img.shields.io/github/issues/svrooij/sonos-cli?style=flat-square
+[badge_npm]: https://img.shields.io/npm/v/@svrooij/sonos-cli?style=flat-square
+[badge_sonos-cli]: https://img.shields.io/badge/sonos-cli-blue?style=flat-square
+[badge_sonos-docs]: https://img.shields.io/badge/sonos-api-blue?style=flat-square
+[badge_sonos-mqtt]: https://img.shields.io/badge/sonos-mqtt-blue?style=flat-square
+[badge_sonos-typescript]: https://img.shields.io/badge/sonos-typescript-blue?style=flat-square
+[badge_sponsor]: https://img.shields.io/badge/Sponsor-on%20Github-red?style=flat-square
 
-[link_sponsor]: https://github.com/sponsors/svrooij
+[link_build]: https://github.com/svrooij/node-sonos-ts/actions
+[link_discord]: https://discord.gg/VMtG6Ft36J
 [link_issues]: https://github.com/svrooij/sonos-cli/issues
 [link_npm]: https://www.npmjs.com/package/@svrooij/sonos-cli
-[link_travis]: https://travis-ci.org/svrooij/sonos-cli
+[link_sonos-cli]: https://github.com/svrooij/sonos-cli
+[link_sonos-docs]: https://svrooij.io/sonos-api-docs
+[link_sonos-mqtt]: https://svrooij.io/sonos2mqtt
+[link_sonos-typescript]: https://svrooij.io/node-sonos-ts
+[link_sponsor]: https://github.com/sponsors/svrooij

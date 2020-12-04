@@ -1,8 +1,8 @@
-import {DeviceCommand} from '../base'
-import {flags} from '@oclif/command'
+import Command, {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
+import SonosCommandHelper from '../helpers/sonos-command-helper'
 
-export default class Execute extends DeviceCommand {
+export default class Execute extends Command {
   static description = 'Execute all available commands on the sonos library. See https://svrooij.github.io/node-sonos-ts/sonos-device for available commands'
 
   static examples = [
@@ -15,7 +15,7 @@ export default class Execute extends DeviceCommand {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    ...DeviceCommand.baseFlags()
+    ...SonosCommandHelper.baseFlags()
   }
 
   static args = [
@@ -32,7 +32,7 @@ export default class Execute extends DeviceCommand {
 
   async run() {
     const {args} = this.parse(Execute)
-    const device = await this.device(flags, args.device)
+    const device = await SonosCommandHelper.device(this, flags, args.device)
     const num = Number(args.input)
     const commandArgs = isNaN(num) ? args.input : num
     const result = await device.ExecuteCommand(args.command, commandArgs)

@@ -1,9 +1,8 @@
-import { flags } from '@oclif/command'
-import { DeviceCommand } from '../../base'
+import Command, { flags } from '@oclif/command'
 import { cli } from 'cli-ux'
-import { MediaItem } from '@svrooij/sonos/lib/musicservices/smapi-client'
+import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
-export default class MusicBrowse extends DeviceCommand {
+export default class MusicBrowse extends Command {
   static description = 'Browse music in an external music service'
 
   static flags = {
@@ -11,12 +10,12 @@ export default class MusicBrowse extends DeviceCommand {
     service: flags.integer({ description: 'Music Service ID' }),
     root: flags.string({ description: 'Start browsing at this tag.', default: 'root' }),
     count: flags.integer({ default: 10 }),
-    ...DeviceCommand.baseFlags()
+    ...SonosCommandHelper.baseFlags()
   }
 
   async run() {
     const { flags } = this.parse(MusicBrowse)
-    const device = await super.device(flags);
+    const device = await SonosCommandHelper.device(this, flags);
 
     let serviceId = flags.service;
     if (!serviceId) {

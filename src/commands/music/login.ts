@@ -1,21 +1,21 @@
-import { flags } from '@oclif/command'
-import { DeviceCommand } from '../../base'
+import Command, { flags } from '@oclif/command'
 import { cli } from 'cli-ux'
+import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
 
-export default class MusicLogin extends DeviceCommand {
+export default class MusicLogin extends Command {
   static description = 'Login to your favorite music service'
 
   static flags = {
     help: flags.help({char: 'h'}),
     // flag with a value (-n, --name=VALUE)
     service: flags.integer({ description: 'Music Service ID' }),
-    ...DeviceCommand.baseFlags()
+    ...SonosCommandHelper.baseFlags()
   }
 
   async run() {
     const { flags } = this.parse(MusicLogin)
-    const device = await super.device(flags);
+    const device = await SonosCommandHelper.device(this, flags);
     let serviceId = flags.service;
     if (!serviceId) {
       const services = await device.MusicServicesService.ListAndParseAvailableServices(true);

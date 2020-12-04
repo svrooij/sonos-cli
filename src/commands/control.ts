@@ -1,12 +1,12 @@
-import {flags} from '@oclif/command'
-import {DeviceCommand} from '../base'
+import Command, {flags} from '@oclif/command'
+import SonosCommandHelper from '../helpers/sonos-command-helper'
 
-export default class Control extends DeviceCommand {
+export default class Control extends Command {
   static description = 'describe the command here'
 
   static flags = {
     help: flags.help({char: 'h'}),
-    ...DeviceCommand.baseFlags()
+    ...SonosCommandHelper.baseFlags()
   }
 
   static args = [
@@ -17,7 +17,7 @@ export default class Control extends DeviceCommand {
 
   async run() {
     const { args, flags } = this.parse(Control)
-    const device = await this.device(flags, args.device)
+    const device = await SonosCommandHelper.device(this, flags, args.device)
 
     switch (args.control) {
     case 'play':
