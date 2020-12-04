@@ -8,11 +8,11 @@ export default class Play extends Command {
     help: flags.help({char: 'h'}),
     // flag with no value (-f, --force)
     'skip-queue': flags.boolean(),
-    ...SonosCommandHelper.baseFlags()
+    ...SonosCommandHelper.baseFlags(),
   }
 
   static args = [
-    {name: 'device', required: true, description: 'Name or uuid of player' },
+    {name: 'device', required: true, description: 'Name or uuid of player'},
     {name: 'url', description: 'The url to play', required: true},
   ]
 

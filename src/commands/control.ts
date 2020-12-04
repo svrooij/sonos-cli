@@ -6,17 +6,17 @@ export default class Control extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    ...SonosCommandHelper.baseFlags()
+    ...SonosCommandHelper.baseFlags(),
   }
 
   static args = [
-    {name: 'device', required: true, description: 'Name or uuid of player' },
+    {name: 'device', required: true, description: 'Name or uuid of player'},
     {name: 'control', required: true, description: 'What do you want to control',
       options: ['play', 'pause', 'next', 'previous', 'toggle', 'stop', 'volumeup', 'volumedown']},
   ]
 
   async run() {
-    const { args, flags } = this.parse(Control)
+    const {args, flags} = this.parse(Control)
     const device = await SonosCommandHelper.device(this, flags, args.device)
 
     switch (args.control) {

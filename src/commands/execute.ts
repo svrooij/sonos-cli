@@ -15,7 +15,7 @@ export default class Execute extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    ...SonosCommandHelper.baseFlags()
+    ...SonosCommandHelper.baseFlags(),
   }
 
   static args = [

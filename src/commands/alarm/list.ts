@@ -14,10 +14,9 @@ export default class AlarmList extends Command {
   }
 
   async run() {
-    const { flags } = this.parse(AlarmList)
+    const {flags} = this.parse(AlarmList)
 
-    
-    const device = await SonosCommandHelper.device(this, flags);
+    const device = await SonosCommandHelper.device(this, flags)
 
     const alarms = await device.AlarmClockService.ListAndParseAlarms()
 
@@ -31,13 +30,13 @@ export default class AlarmList extends Command {
 
     cli.table(alarms, {
       ID: {},
-      StartLocalTime: { header: 'Start at' },
-      RoomUUID: { header: 'Room' },
-      Duration: { extended: true },
+      StartLocalTime: {header: 'Start at'},
+      RoomUUID: {header: 'Room'},
+      Duration: {extended: true},
       Enabled: {},
       Volume: {},
       Recurrence: {},
-      ProgramURI: { header: 'Sound url', extended: true },
+      ProgramURI: {header: 'Sound url', extended: true},
       // ProgramMetaData: {header: 'Sound metadata', extended: true},
     }, {
       printLine: this.log,

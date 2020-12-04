@@ -7,11 +7,11 @@ export default class Info extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    ...SonosCommandHelper.baseFlags()
+    ...SonosCommandHelper.baseFlags(),
   }
 
   static args = [
-    {name: 'device', required: true, description: 'Name or uuid of player' },
+    {name: 'device', required: true, description: 'Name or uuid of player'},
     {name: 'kind', description: 'What do you want to load', required: true, options: ['attributes', 'media', 'position', 'queue', 'volume']},
   ]
 
