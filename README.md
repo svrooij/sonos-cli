@@ -40,9 +40,10 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`sonos alarm:delete ID`](#sonos-alarmdelete-id)
 * [`sonos alarm:list`](#sonos-alarmlist)
 * [`sonos alarm:update ID`](#sonos-alarmupdate-id)
-* [`sonos control DEVICE CONTROL`](#sonos-control-device-control)
+* [`sonos control DEVICE COMMAND`](#sonos-control-device-command)
 * [`sonos execute DEVICE COMMAND [INPUT]`](#sonos-execute-device-command-input)
 * [`sonos help [COMMAND]`](#sonos-help-command)
 * [`sonos info DEVICE KIND`](#sonos-info-device-kind)
@@ -50,9 +51,29 @@ USAGE
 * [`sonos music:login`](#sonos-musiclogin)
 * [`sonos music:services`](#sonos-musicservices)
 * [`sonos play DEVICE URL`](#sonos-play-device-url)
+* [`sonos update [CHANNEL]`](#sonos-update-channel)
 * [`sonos zones [FILE]`](#sonos-zones-file)
 
+## `sonos alarm:delete ID`
+
+Delete an alarm by ID
+
+```
+USAGE
+  $ sonos alarm:delete ID
+
+ARGUMENTS
+  ID  The ID of the alarm you want to delete
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/alarm/delete.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/alarm/delete.ts)_
+
 ## `sonos alarm:list`
+
+List your alarms
 
 ```
 USAGE
@@ -74,6 +95,8 @@ _See code: [src/commands/alarm/list.ts](https://github.com/svrooij/sonos-cli/blo
 
 ## `sonos alarm:update ID`
 
+Update a single alarm by ID
+
 ```
 USAGE
   $ sonos alarm:update ID
@@ -93,15 +116,17 @@ OPTIONS
 
 _See code: [src/commands/alarm/update.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/alarm/update.ts)_
 
-## `sonos control DEVICE CONTROL`
+## `sonos control DEVICE COMMAND`
+
+Send a simple command to your speaker
 
 ```
 USAGE
-  $ sonos control DEVICE CONTROL
+  $ sonos control DEVICE COMMAND
 
 ARGUMENTS
   DEVICE   Name or uuid of player
-  CONTROL  (play|pause|next|previous|toggle|stop|volumeup|volumedown) What do you want to control
+  COMMAND  (play|pause|next|previous|toggle|stop|volumeup|volumedown) What command do you want to send
 
 OPTIONS
   -h, --help  show CLI help
@@ -110,6 +135,8 @@ OPTIONS
 _See code: [src/commands/control.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/control.ts)_
 
 ## `sonos execute DEVICE COMMAND [INPUT]`
+
+Execute all available commands on the sonos library. See https://svrooij.github.io/node-sonos-ts/sonos-device for available commands
 
 ```
 USAGE
@@ -135,6 +162,8 @@ _See code: [src/commands/execute.ts](https://github.com/svrooij/sonos-cli/blob/v
 
 ## `sonos help [COMMAND]`
 
+display help for sonos
+
 ```
 USAGE
   $ sonos help [COMMAND]
@@ -149,6 +178,8 @@ OPTIONS
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
 ## `sonos info DEVICE KIND`
+
+Show device info
 
 ```
 USAGE
@@ -166,6 +197,8 @@ _See code: [src/commands/info.ts](https://github.com/svrooij/sonos-cli/blob/v0.0
 
 ## `sonos music:browse`
 
+Browse music in an external music service
+
 ```
 USAGE
   $ sonos music:browse
@@ -181,6 +214,8 @@ _See code: [src/commands/music/browse.ts](https://github.com/svrooij/sonos-cli/b
 
 ## `sonos music:login`
 
+Login to your favorite music service
+
 ```
 USAGE
   $ sonos music:login
@@ -193,6 +228,8 @@ OPTIONS
 _See code: [src/commands/music/login.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/music/login.ts)_
 
 ## `sonos music:services`
+
+Show all music services!
 
 ```
 USAGE
@@ -215,6 +252,8 @@ _See code: [src/commands/music/services.ts](https://github.com/svrooij/sonos-cli
 
 ## `sonos play DEVICE URL`
 
+Add the supplied url to the queue
+
 ```
 USAGE
   $ sonos play DEVICE URL
@@ -230,7 +269,20 @@ OPTIONS
 
 _See code: [src/commands/play.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/play.ts)_
 
+## `sonos update [CHANNEL]`
+
+update the sonos CLI
+
+```
+USAGE
+  $ sonos update [CHANNEL]
+```
+
+_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v1.3.10/src/commands/update.ts)_
+
 ## `sonos zones [FILE]`
+
+Do device discovery
 
 ```
 USAGE

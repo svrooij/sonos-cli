@@ -2,7 +2,7 @@ import Command, {flags} from '@oclif/command'
 import SonosCommandHelper from '../helpers/sonos-command-helper'
 
 export default class Control extends Command {
-  static description = 'describe the command here'
+  static description = 'Send a simple command to your speaker'
 
   static flags = {
     help: flags.help({char: 'h'}),
@@ -11,7 +11,7 @@ export default class Control extends Command {
 
   static args = [
     {name: 'device', required: true, description: 'Name or uuid of player'},
-    {name: 'control', required: true, description: 'What do you want to control',
+    {name: 'command', required: true, description: 'What command do you want to send',
       options: ['play', 'pause', 'next', 'previous', 'toggle', 'stop', 'volumeup', 'volumedown']},
   ]
 

@@ -3,7 +3,7 @@ import Command, {flags} from '@oclif/command'
 import SonosCommandHelper from '../helpers/sonos-command-helper'
 
 export default class Info extends Command {
-  static description = 'Show device data'
+  static description = 'Show device info'
 
   static flags = {
     help: flags.help({char: 'h'}),
@@ -23,7 +23,7 @@ export default class Info extends Command {
       cli.styledJSON(await device.GetZoneAttributes())
       break
     case 'media':
-      this.log(JSON.stringify(await device.AVTransportService.GetMediaInfo(), null, 2))
+      cli.styledJSON(await device.AVTransportService.GetMediaInfo())
       break
     case 'position':
       cli.styledJSON(await device.AVTransportService.GetPositionInfo())
