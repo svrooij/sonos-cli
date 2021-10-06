@@ -22,6 +22,7 @@ This sonos cli, is just a cli wrapper around the [sonos-ts](https://github.com/s
 
 <!-- toc -->
 * [Usage](#usage)
+* [Example](#example)
 * [Commands](#commands)
 <!-- tocstop -->
 # Usage
@@ -36,8 +37,30 @@ $ sonos --help [COMMAND]
 USAGE
   $ sonos COMMAND
 ...
+
+# save the list of discovered devices to use later
+$ sonos zones --save
+Searching for sonos devices... done
+ Name        Zone ID                  Groupname       
+ ─────────── ──────────────────────── ─────────────── 
+ Bedroom     RINCON_B8E937EFD8EC01400 Bedroom + 1     
+...
+
 ```
 <!-- usagestop -->
+# Example
+<!-- example -->
+```sh-session
+$ sonos zones --save
+Searching for sonos devices... done
+ Name        Zone ID                  Groupname       
+ ─────────── ──────────────────────── ─────────────── 
+ Bedroom     RINCON_B8E937EFD8EC01400 Bedroom + 1     
+ ...
+$ sonos info Bedroom volume
+Current volume 14
+```
+<!-- examplestop -->
 # Commands
 <!-- commands -->
 * [`sonos alarm:delete ID`](#sonos-alarmdelete-id)
@@ -298,7 +321,7 @@ OPTIONS
   --no-header             hide table header from output
   --no-truncate           do not truncate output to fit screen
   --output=csv|json|yaml  output in a more machine friendly format
-  --save
+  --save                  save the discovered set of zones
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
