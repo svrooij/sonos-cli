@@ -6,7 +6,7 @@ export default class AlarmDelete extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    ...SonosCommandHelper.baseFlags(),
+    ...SonosCommandHelper.baseFlags(true),
   }
 
   static args = [{name: 'id', required: true, description: 'The ID of the alarm you want to delete', parse: (i: string) => parseInt(i, 10)}]

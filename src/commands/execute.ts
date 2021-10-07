@@ -15,7 +15,7 @@ export default class Execute extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    ...SonosCommandHelper.baseFlags(),
+    ...SonosCommandHelper.baseFlags(true),
   }
 
   static args = [
@@ -31,7 +31,7 @@ export default class Execute extends Command {
   ]
 
   async run() {
-    const {args} = this.parse(Execute)
+    const {args, flags} = this.parse(Execute)
     const device = await SonosCommandHelper.device(this, flags, args.device)
     const num = Number(args.input)
     const commandArgs = isNaN(num) ? args.input : num

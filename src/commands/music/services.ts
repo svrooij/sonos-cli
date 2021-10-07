@@ -9,7 +9,7 @@ export default class MusicServices extends Command {
   static flags = {
     help: flags.help({char: 'h'}),
     subscribed: flags.boolean({description: 'Only show services where you logged-in to'}),
-    ...SonosCommandHelper.baseFlags(),
+    ...SonosCommandHelper.baseFlags(true),
     ...cli.table.flags(),
   }
 

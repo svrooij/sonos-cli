@@ -16,7 +16,7 @@ export default class Info extends Command {
   ]
 
   async run() {
-    const {args} = this.parse(Info)
+    const {args, flags} = this.parse(Info)
     const device = await SonosCommandHelper.device(this, flags, args.device)
     switch (args.kind) {
     case 'attributes':
@@ -35,5 +35,7 @@ export default class Info extends Command {
       this.log('Current volume %d', (await device.RenderingControlService.GetVolume({InstanceID: 0, Channel: 'Master'})).CurrentVolume)
       break
     }
+
+    this.exit()
   }
 }

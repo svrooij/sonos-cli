@@ -9,7 +9,7 @@ export default class AlarmList extends Command {
   static flags = {
     help: flags.help({char: 'h'}),
     'disable-all': flags.boolean({hidden: true}),
-    ...SonosCommandHelper.baseFlags(),
+    ...SonosCommandHelper.baseFlags(true),
     ...cli.table.flags(),
   }
 

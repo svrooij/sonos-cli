@@ -19,8 +19,12 @@ export interface Options {
 export default class SonosCommandHelper {
   static async device(command: Command, options: Options, device: string | undefined = undefined): Promise<SonosDevice> {
     const filename = path.join(command.config.dataDir.replace(/@/, ''), 'devices.json')
+    const fileExists = await fs.pathExists(filename)
+    // cli.log('Device file: %s exists %o', filename, fileExists ? 'Yes' : 'No')
+    // cli.styledJSON(options)
+
     let devices: DeviceConfig[] | undefined
-    if (options['refresh-zones'] === true || !await fs.pathExists(filename)) {
+    if (options['refresh-zones'] === true || !fileExists) {
       cli.action.start('Loading devices')
       const manager = new SonosManager()
 
@@ -32,16 +36,17 @@ export default class SonosCommandHelper {
         await manager.InitializeWithDiscovery()
       }
 
+      manager.CancelSubscription()
       if (manager.Devices.length === 0) {
         return command.error('No sonos device found, specify a sonos ip with \'--ip\'')
       }
       cli.action.stop()
-      manager.CancelSubscription()
-      if (options['save-zones'] === true) {
+
+      devices = manager.Devices.map(d => {
+        return {name: d.Name, host: d.Host, uuid: d.Uuid} as DeviceConfig
+      })
+      if (options['save-zones'] === true || !fileExists) {
         const dir = command.config.dataDir.replace(/@/, '')
-        devices = manager.Devices.map(d => {
-          return {name: d.Name, host: d.Host, uuid: d.Uuid} as DeviceConfig
-        })
 
         await fs.ensureDir(dir)
         await fs.writeJSON(filename, devices)
@@ -59,11 +64,11 @@ export default class SonosCommandHelper {
     return new SonosDevice(config.host, 1400, config.uuid, config.name)
   }
 
-  static baseFlags() {
+  static baseFlags(hide: boolean | undefined = undefined) {
     return {
-      ip: F.string({description: 'Load devices from IP instead of Service Discovery', hidden: true}),
-      'refresh-zones': F.boolean({description: 'Refresh the discovered zones', hidden: true}),
-      'save-zones': F.boolean({description: 'Save the discovered zones', hidden: true}),
+      ip: F.string({description: 'Load devices from IP instead of Service Discovery', hidden: hide}),
+      'refresh-zones': F.boolean({description: 'Refresh the discovered zones', hidden: hide}),
+      'save-zones': F.boolean({description: 'Save the discovered zones', hidden: hide}),
     }
   }
 }

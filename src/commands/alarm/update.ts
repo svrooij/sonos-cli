@@ -13,7 +13,7 @@ export default class AlarmUpdate extends Command {
     start: flags.string({description: 'Starttime as hh:mm:ss'}),
     duration: flags.string({description: 'Duration as hh:mm:ss'}),
     recurrence: flags.string({description: 'What is the recurrence of this alarm', options: ['DAILY', 'WEEKDAYS', 'ONCE']}),
-    ...SonosCommandHelper.baseFlags(),
+    ...SonosCommandHelper.baseFlags(true),
   }
 
   static args = [{name: 'id',  description: 'Alarm ID you want to update', required: true}]

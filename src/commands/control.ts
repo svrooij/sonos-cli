@@ -6,7 +6,7 @@ export default class Control extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    ...SonosCommandHelper.baseFlags(),
+    ...SonosCommandHelper.baseFlags(false),
   }
 
   static args = [

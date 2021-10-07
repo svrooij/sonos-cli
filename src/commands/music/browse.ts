@@ -10,7 +10,7 @@ export default class MusicBrowse extends Command {
     service: flags.integer({description: 'Music Service ID'}),
     root: flags.string({description: 'Start browsing at this tag.', default: 'root'}),
     count: flags.integer({default: 10}),
-    ...SonosCommandHelper.baseFlags(),
+    ...SonosCommandHelper.baseFlags(true),
   }
 
   async run() {

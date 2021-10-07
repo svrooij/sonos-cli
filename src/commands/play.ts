@@ -8,7 +8,7 @@ export default class Play extends Command {
     help: flags.help({char: 'h'}),
     // flag with no value (-f, --force)
     'skip-queue': flags.boolean(),
-    ...SonosCommandHelper.baseFlags(),
+    ...SonosCommandHelper.baseFlags(false),
   }
 
   static args = [

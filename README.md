@@ -31,7 +31,7 @@ $ npm install -g @svrooij/sonos-cli
 $ sonos COMMAND
 running command...
 $ sonos (-v|--version|version)
-@svrooij/sonos-cli/0.0.0-development win32-x64 node-v12.16.3
+@svrooij/sonos-cli/0.0.0-development win32-x64 node-v16.8.0
 $ sonos --help [COMMAND]
 USAGE
   $ sonos COMMAND
@@ -129,7 +129,10 @@ ARGUMENTS
   COMMAND  (play|pause|next|previous|toggle|stop|volumeup|volumedown) What command do you want to send
 
 OPTIONS
-  -h, --help  show CLI help
+  -h, --help       show CLI help
+  --ip=ip          Load devices from IP instead of Service Discovery
+  --refresh-zones  Refresh the discovered zones
+  --save-zones     Save the discovered zones
 ```
 
 _See code: [src/commands/control.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/control.ts)_
@@ -190,7 +193,10 @@ ARGUMENTS
   KIND    (attributes|media|position|queue|volume) What do you want to load
 
 OPTIONS
-  -h, --help  show CLI help
+  -h, --help       show CLI help
+  --ip=ip          Load devices from IP instead of Service Discovery
+  --refresh-zones  Refresh the discovered zones
+  --save-zones     Save the discovered zones
 ```
 
 _See code: [src/commands/info.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/info.ts)_
@@ -263,7 +269,10 @@ ARGUMENTS
   URL     The url to play
 
 OPTIONS
-  -h, --help    show CLI help
+  -h, --help       show CLI help
+  --ip=ip          Load devices from IP instead of Service Discovery
+  --refresh-zones  Refresh the discovered zones
+  --save-zones     Save the discovered zones
   --skip-queue
 ```
 
