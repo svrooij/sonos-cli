@@ -66,8 +66,8 @@
   },
   "repository": "svrooij/sonos-cli",
   "scripts": {
+    "lint": "eslint . --ext .ts --config .eslintrc",
     "postpack": "rm -f oclif.manifest.json",
-    "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --config test/.mocharc.json --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
