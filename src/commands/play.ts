@@ -26,7 +26,7 @@ export default class Play extends Command {
       this.log('Success %s', result)
     } else {
       this.log('AddUriToQueue: %s', args.url)
-      const result = await device.AddUriToQueue(args.url).then(() => device.Next())
+      const result = await device.AddUriToQueue(args.url).then(() => device.SwitchToQueue())
       this.log('Success %s', result)
     }
   }
