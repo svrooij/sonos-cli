@@ -19,7 +19,7 @@ export default class Control extends Command {
     const {args, flags} = this.parse(Control)
     const device = await SonosCommandHelper.device(this, flags, args.device)
 
-    switch (args.control) {
+    switch (args.command) {
     case 'play':
       await device.Play()
       break
