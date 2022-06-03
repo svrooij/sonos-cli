@@ -12,7 +12,7 @@ export default class Control extends Command {
   static args = [
     {name: 'device', required: true, description: 'Name or uuid of player'},
     {name: 'command', required: true, description: 'What command do you want to send',
-      options: ['play', 'pause', 'next', 'previous', 'toggle', 'stop', 'volumeup', 'volumedown']},
+      options: ['play', 'pause', 'next', 'previous', 'toggle', 'stop', 'volumeup', 'volumedown', 'mute', 'unmute', 'togglemute']},
   ]
 
   async run() {
@@ -44,6 +44,17 @@ export default class Control extends Command {
     case 'volumedown':
       await device.SetRelativeVolume(-4)
       break
+    case 'mute':
+      await device.RenderingControlService.SetMute({InstanceID: 0, Channel: 'Master', DesiredMute: true})
+      break
+    case 'unmute':
+      await device.RenderingControlService.SetMute({InstanceID: 0, Channel: 'Master', DesiredMute: false})
+      break
+    case 'togglemute': {
+      const muteResponse = await device.RenderingControlService.GetMute({InstanceID: 0, Channel: 'Master'})
+      await device.RenderingControlService.SetMute({InstanceID: 0, Channel: 'Master', DesiredMute: !muteResponse.CurrentMute})
+      break
+    }
     }
   }
 }
