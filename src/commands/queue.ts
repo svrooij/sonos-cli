@@ -12,7 +12,7 @@ export default class Queue extends Command {
   static args = [
     {name: 'device', required: true, description: 'Name or uuid of player'},
     {name: 'command', required: true, description: 'What command do you want to send',
-      options: ['clear']},
+      options: ['clear', 'next', 'previous']},
   ]
 
   async run() {
@@ -22,6 +22,12 @@ export default class Queue extends Command {
     switch (args.command) {
     case 'clear':
       await device.AVTransportService.RemoveAllTracksFromQueue()
+      break
+    case 'next':
+      await device.AVTransportService.Next()
+      break
+    case 'previous':
+      await device.AVTransportService.Previous()
       break
     }
   }
