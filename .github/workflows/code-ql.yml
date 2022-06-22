@@ -1,0 +1,42 @@
+# This workflow integrates Scan with GitHub's code scanning feature
+
+name: Code QL
+
+# This section configures the trigger for the workflow. Feel free to customize depending on your convention
+on:
+  push:
+    branch:
+      - master
+      - main
+      - beta
+  pull_request:
+    branch:
+      - master
+      - main
+      - beta
+jobs:
+  Scan-Build:
+    # Scan runs on ubuntu, mac and windows
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use node 16
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16
+    - name: Install depencencies
+      run: npm ci
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: javascript
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+    - name: Upload report
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: reports
