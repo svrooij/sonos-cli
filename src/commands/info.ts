@@ -1,4 +1,4 @@
-import {Command, Flags, CliUx} from '@oclif/core';
+import {Command, Flags, CliUx} from '@oclif/core'
 import SonosCommandHelper from '../helpers/sonos-command-helper'
 
 export default class Info extends Command {

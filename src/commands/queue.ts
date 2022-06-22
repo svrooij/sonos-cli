@@ -1,4 +1,4 @@
-import {Command, Flags } from '@oclif/core';
+import {Command, Flags} from '@oclif/core'
 import SonosCommandHelper from '../helpers/sonos-command-helper'
 
 export default class Queue extends Command {

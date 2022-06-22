@@ -1,4 +1,4 @@
-import {Command, Flags, CliUx} from '@oclif/core';
+import {Command, Flags} from '@oclif/core'
 import {PatchAlarm} from '@svrooij/sonos/lib/models'
 import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
@@ -21,12 +21,12 @@ export default class AlarmUpdate extends Command {
   async run() {
     const {args, flags} = await this.parse(AlarmUpdate)
 
-    const id = parseInt(args.id, 10)
-    if (isNaN(id) || id < 0 || id > 100000) {
+    const id = Number.parseInt(args.id, 10)
+    if (Number.isNaN(id) || id < 0 || id > 100_000) {
       this.error('ID not a valid value', {exit: 4})
     }
 
-    const device = await SonosCommandHelper.device(this, flags)
+    const device = await SonosCommandHelper.device(this, flags, undefined)
 
     let enabled: boolean | undefined
     if (flags.enable === true) enabled = true

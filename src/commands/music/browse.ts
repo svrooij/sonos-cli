@@ -1,4 +1,4 @@
-import {Command, Flags, CliUx} from '@oclif/core';
+import {Command, Flags, CliUx} from '@oclif/core'
 import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
 export default class MusicBrowse extends Command {
@@ -22,12 +22,12 @@ export default class MusicBrowse extends Command {
       CliUx.ux.table(
         services as any[],
         {
-          Id: { },
-          Name: { },
+          Id: {},
+          Name: {},
         })
       const answer = await CliUx.ux.prompt('Browse which service?', {required: true})
 
-      serviceId = parseInt(answer, 10)
+      serviceId = Number.parseInt(answer, 10)
     }
 
     const client = await device.MusicServicesClient(serviceId)
@@ -50,7 +50,7 @@ export default class MusicBrowse extends Command {
           id: {},
         })
         const answer = await CliUx.ux.prompt('Browse which item?')
-        query = items.find(i => i.index === parseInt(answer, 10))?.id ?? 'root'
+        query = items.find(i => i.index === Number.parseInt(answer, 10))?.id ?? 'root'
       } else if (results.mediaMetadata) {
         CliUx.ux.info('Got songs %s', query)
         CliUx.ux.table(results.mediaMetadata as any[], {

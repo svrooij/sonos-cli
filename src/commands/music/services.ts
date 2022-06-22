@@ -1,4 +1,4 @@
-import {Command, Flags, CliUx} from '@oclif/core';
+import {Command, Flags, CliUx} from '@oclif/core'
 import {MusicService} from '@svrooij/sonos/lib/services'
 import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
@@ -28,7 +28,7 @@ export default class MusicServices extends Command {
         Name: {},
         Authentication: {get: s => s.Policy.Auth},
         Capabilities: {extended: true},
-        CapabilityFlags: {get: s => parseInt(s.Capabilities, 10).toString(2).padStart(25, ' ')},
+        CapabilityFlags: {get: s => Number.parseInt(s.Capabilities, 10).toString(2).padStart(25, ' ')},
         ContainerType: {extended: true},
         SecureUri: {extended: true},
         Version: {extended: true},

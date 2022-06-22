@@ -9,12 +9,12 @@ export class AlarmDelete extends Command {
     ...SonosCommandHelper.baseFlags(true),
   }
 
-  static args = [{name: 'id', required: true, description: 'The ID of the alarm you want to delete',  }]
+  static args = [{name: 'id', required: true, description: 'The ID of the alarm you want to delete'}]
 
-  async run() {
+  async run(): Promise<void> {
     const {args, flags} = await this.parse(AlarmDelete)
 
-    const device = await SonosCommandHelper.device(this, flags)
+    const device = await SonosCommandHelper.device(this, flags, undefined)
     await device.AlarmClockService.DestroyAlarm({ID: args.id})
     this.log('Alarm removed')
   }

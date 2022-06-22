@@ -3,7 +3,7 @@ import {SonosDevice, SonosManager} from '@svrooij/sonos'
 import {Command, Flags, CliUx} from '@oclif/core'
 
 import * as fs from 'fs-extra'
-import * as path from 'path'
+import * as path from 'node:path'
 
 const stringCompare = function (a: string, b: string): boolean {
   return a.localeCompare(b, undefined, {sensitivity: 'base'}) === 0
@@ -17,7 +17,7 @@ export interface Options {
 }
 
 export default class SonosCommandHelper {
-  static async device(command: Command, options: Options, device: string | undefined = undefined): Promise<SonosDevice> {
+  static async device(command: Command, options: Options, device: string | undefined): Promise<SonosDevice> {
     const filename = path.join(command.config.dataDir.replace(/@/, ''), 'devices.json')
     const fileExists = await fs.pathExists(filename)
     // cli.log('Device file: %s exists %o', filename, fileExists ? 'Yes' : 'No')
@@ -40,6 +40,7 @@ export default class SonosCommandHelper {
       if (manager.Devices.length === 0) {
         return command.error('No sonos device found, specify a sonos ip with \'--ip\'')
       }
+
       CliUx.ux.action.stop()
 
       devices = manager.Devices.map(d => {
@@ -64,7 +65,7 @@ export default class SonosCommandHelper {
     return new SonosDevice(config.host, 1400, config.uuid, config.name)
   }
 
-  static baseFlags(hide: boolean | undefined = undefined) {
+  static baseFlags(hide: boolean | undefined) {
     return {
       ip: Flags.string({description: 'Load devices from IP instead of Service Discovery', hidden: hide}),
       'refresh-zones': Flags.boolean({description: 'Refresh the discovered zones', hidden: hide}),

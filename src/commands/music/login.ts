@@ -1,4 +1,4 @@
-import {Command, Flags, CliUx} from '@oclif/core';
+import {Command, Flags, CliUx} from '@oclif/core'
 import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
 export default class MusicLogin extends Command {
@@ -20,12 +20,12 @@ export default class MusicLogin extends Command {
       CliUx.ux.table(
         services.filter(s => s.Policy.Auth === 'AppLink' || s.Policy.Auth === 'DeviceLink') as any[],
         {
-          Id: { },
-          Name: { },
+          Id: {},
+          Name: {},
         })
       const answer = await CliUx.ux.prompt('Login to which service?', {required: true})
 
-      serviceId = parseInt(answer, 10)
+      serviceId = Number.parseInt(answer, 10)
     }
 
     const client = await device.MusicServicesClient(serviceId)

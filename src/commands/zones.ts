@@ -1,8 +1,8 @@
 import {Command, Flags, CliUx} from '@oclif/core'
-import {SonosDevice, SonosManager} from '@svrooij/sonos'
+import {SonosManager} from '@svrooij/sonos'
 import {DeviceConfig} from '../models/device-config'
 
-import * as path from 'path'
+import * as path from 'node:path'
 import * as fs from 'fs-extra'
 
 export class Zones extends Command {
@@ -19,7 +19,7 @@ export class Zones extends Command {
   static args = [{name: 'file'}]
 
   async run() {
-    const { flags } = await this.parse(Zones)
+    const {flags} = await this.parse(Zones)
     const manager = new SonosManager()
     if (flags.ip) {
       await manager.InitializeFromDevice(flags.ip)
@@ -30,7 +30,7 @@ export class Zones extends Command {
 
     CliUx.ux.action.stop()
 
-    CliUx.ux.table( manager.Devices as any [], {
+    CliUx.ux.table(manager.Devices as any [], {
       Name: {},
       Uuid: {header: 'Zone ID'},
       host: {header: 'IP', extended: true},
@@ -38,7 +38,7 @@ export class Zones extends Command {
       Coordinator: {header: 'Coordinator', extended: true, get: d => d.Coordinator.Name},
       CoordinatorId: {header: 'Coordinator ID', extended: true, get: d => d.Coordinator.Uuid},
     }, {
-      printLine: this.log,
+      //printLine: this.log,
       ...flags,
     } as CliUx.Table.table.Options)
 
@@ -51,6 +51,7 @@ export class Zones extends Command {
       await fs.ensureDir(dir)
       await fs.writeJSON(filename, devices)
     }
+
     manager.CancelSubscription()
     this.exit()
   }

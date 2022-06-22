@@ -1,4 +1,4 @@
-import {Command, Flags, CliUx} from '@oclif/core';
+import {Command, Flags, CliUx} from '@oclif/core'
 import SonosCommandHelper from '../helpers/sonos-command-helper'
 
 export default class Execute extends Command {
@@ -33,7 +33,7 @@ export default class Execute extends Command {
     const {args, flags} = await this.parse(Execute)
     const device = await SonosCommandHelper.device(this, flags, args.device)
     const num = Number(args.input)
-    const commandArgs = isNaN(num) ? args.input : num
+    const commandArgs = Number.isNaN(num) ? args.input : num
     const result = await device.ExecuteCommand(args.command, commandArgs)
     if (typeof result === 'boolean') {
       this.log('Executed %s success:%s', args.command, result)
