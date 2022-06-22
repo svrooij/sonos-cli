@@ -17,7 +17,7 @@ export interface Options {
 }
 
 export default class SonosCommandHelper {
-  static async device(command: Command, options: Options, device: string | undefined): Promise<SonosDevice> {
+  static async device(command: Command, options: Options, device?: string): Promise<SonosDevice> {
     const filename = path.join(command.config.dataDir.replace(/@/, ''), 'devices.json')
     const fileExists = await fs.pathExists(filename)
     // cli.log('Device file: %s exists %o', filename, fileExists ? 'Yes' : 'No')
@@ -65,7 +65,7 @@ export default class SonosCommandHelper {
     return new SonosDevice(config.host, 1400, config.uuid, config.name)
   }
 
-  static baseFlags(hide: boolean | undefined) {
+  static baseFlags(hide: boolean | undefined = undefined) {
     return {
       ip: Flags.string({description: 'Load devices from IP instead of Service Discovery', hidden: hide}),
       'refresh-zones': Flags.boolean({description: 'Refresh the discovered zones', hidden: hide}),

@@ -26,7 +26,7 @@ export default class AlarmUpdate extends Command {
       this.error('ID not a valid value', {exit: 4})
     }
 
-    const device = await SonosCommandHelper.device(this, flags, undefined)
+    const device = await SonosCommandHelper.device(this, flags)
 
     let enabled: boolean | undefined
     if (flags.enable === true) enabled = true

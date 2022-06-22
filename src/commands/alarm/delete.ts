@@ -14,7 +14,7 @@ export class AlarmDelete extends Command {
   async run(): Promise<void> {
     const {args, flags} = await this.parse(AlarmDelete)
 
-    const device = await SonosCommandHelper.device(this, flags, undefined)
+    const device = await SonosCommandHelper.device(this, flags)
     await device.AlarmClockService.DestroyAlarm({ID: args.id})
     this.log('Alarm removed')
   }
