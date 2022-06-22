@@ -31,7 +31,7 @@ $ npm install -g @svrooij/sonos-cli
 $ sonos COMMAND
 running command...
 $ sonos (-v|--version|version)
-@svrooij/sonos-cli/0.0.0-development win32-x64 node-v16.8.0
+@svrooij/sonos-cli/0.0.0-development win32-x64 node-v16.15.1
 $ sonos --help [COMMAND]
 USAGE
   $ sonos COMMAND
@@ -178,7 +178,7 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.18/src/commands/help.ts)_
 
 ## `sonos info DEVICE KIND`
 
@@ -285,9 +285,21 @@ update the sonos CLI
 ```
 USAGE
   $ sonos update [CHANNEL]
+
+OPTIONS
+  -a, --available        Install a specific version.
+  -i, --interactive      Interactively select version to install. This is ignored if a channel is provided.
+  -v, --version=version  Install a specific version.
+  --force                Force a re-download of the requested version.
+
+EXAMPLES
+  [object Object]
+  [object Object]
+  [object Object]
+  [object Object]
 ```
 
-_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v1.3.10/src/commands/update.ts)_
+_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v3.0.0/src/commands/update.ts)_
 
 ## `sonos zones [FILE]`
 
