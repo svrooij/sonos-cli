@@ -1,11 +1,11 @@
-import Command, {flags} from '@oclif/command'
+import {Command, Flags } from '@oclif/core';
 import SonosCommandHelper from '../helpers/sonos-command-helper'
 
 export default class Queue extends Command {
   static description = 'Manipulates the queue on your speaker'
 
   static flags = {
-    help: flags.help({char: 'h'}),
+    help: Flags.help({char: 'h'}),
     ...SonosCommandHelper.baseFlags(false),
   }
 
@@ -16,7 +16,7 @@ export default class Queue extends Command {
   ]
 
   async run() {
-    const {args, flags} = this.parse(Queue)
+    const {args, flags} = await this.parse(Queue)
     const device = await SonosCommandHelper.device(this, flags, args.device)
 
     switch (args.command) {

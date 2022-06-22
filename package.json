@@ -8,13 +8,12 @@
   },
   "bugs": "https://github.com/svrooij/sonos-cli/issues",
   "dependencies": {
-    "@oclif/command": "^1.8.16",
-    "@oclif/config": "^1.18.3",
+    "@oclif/core": "^1.9.3",
     "@oclif/plugin-help": "^5.1.12",
     "@oclif/plugin-not-found": "^2.3.1",
     "@oclif/plugin-update": "^3.0.0",
+    "@oclif/plugin-version": "^1",
     "@svrooij/sonos": "2.5.0",
-    "cli-ux": "^6.0.9",
     "fs-extra": "^10.1.0",
     "tslib": "^2.4.0"
   },
@@ -58,6 +57,8 @@
   "oclif": {
     "commands": "./lib/commands",
     "bin": "sonos",
+    "additionalHelpFlags": ["-h"],
+    "additionalVersionFlags": ["-v"],
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-not-found",
@@ -69,6 +70,7 @@
     "lint": "eslint . --ext .ts --config .eslintrc",
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "readme": "tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --config test/.mocharc.json --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },

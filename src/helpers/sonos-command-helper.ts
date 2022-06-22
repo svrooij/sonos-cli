@@ -1,7 +1,7 @@
 import {DeviceConfig} from '../models/device-config'
 import {SonosDevice, SonosManager} from '@svrooij/sonos'
-import Command, {flags as F} from '@oclif/command'
-import {cli} from 'cli-ux'
+import {Command, Flags, CliUx} from '@oclif/core'
+
 import * as fs from 'fs-extra'
 import * as path from 'path'
 
@@ -25,14 +25,14 @@ export default class SonosCommandHelper {
 
     let devices: DeviceConfig[] | undefined
     if (options['refresh-zones'] === true || !fileExists) {
-      cli.action.start('Loading devices')
+      CliUx.ux.action.start('Loading devices')
       const manager = new SonosManager()
 
       if (options.ip) {
-        cli.action.start(`Loading devices from ${options.ip}`)
+        CliUx.ux.action.start(`Loading devices from ${options.ip}`)
         await manager.InitializeFromDevice(options.ip)
       } else {
-        cli.action.start('Sonos device discovery')
+        CliUx.ux.action.start('Sonos device discovery')
         await manager.InitializeWithDiscovery()
       }
 
@@ -40,7 +40,7 @@ export default class SonosCommandHelper {
       if (manager.Devices.length === 0) {
         return command.error('No sonos device found, specify a sonos ip with \'--ip\'')
       }
-      cli.action.stop()
+      CliUx.ux.action.stop()
 
       devices = manager.Devices.map(d => {
         return {name: d.Name, host: d.Host, uuid: d.Uuid} as DeviceConfig
@@ -66,9 +66,9 @@ export default class SonosCommandHelper {
 
   static baseFlags(hide: boolean | undefined = undefined) {
     return {
-      ip: F.string({description: 'Load devices from IP instead of Service Discovery', hidden: hide}),
-      'refresh-zones': F.boolean({description: 'Refresh the discovered zones', hidden: hide}),
-      'save-zones': F.boolean({description: 'Save the discovered zones', hidden: hide}),
+      ip: Flags.string({description: 'Load devices from IP instead of Service Discovery', hidden: hide}),
+      'refresh-zones': Flags.boolean({description: 'Refresh the discovered zones', hidden: hide}),
+      'save-zones': Flags.boolean({description: 'Save the discovered zones', hidden: hide}),
     }
   }
 }

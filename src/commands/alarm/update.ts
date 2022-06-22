@@ -1,4 +1,4 @@
-import {Command, flags} from '@oclif/command'
+import {Command, Flags, CliUx} from '@oclif/core';
 import {PatchAlarm} from '@svrooij/sonos/lib/models'
 import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
@@ -6,20 +6,20 @@ export default class AlarmUpdate extends Command {
   static description = 'Update a single alarm by ID'
 
   static flags = {
-    help: flags.help({char: 'h'}),
-    volume: flags.integer({description: 'New Volume'}),
-    enable: flags.boolean({description: 'Enable the alarm?', exclusive: ['disable']}),
-    disable: flags.boolean({description: 'Disable the alarm?', exclusive: ['enable']}),
-    start: flags.string({description: 'Starttime as hh:mm:ss'}),
-    duration: flags.string({description: 'Duration as hh:mm:ss'}),
-    recurrence: flags.string({description: 'What is the recurrence of this alarm', options: ['DAILY', 'WEEKDAYS', 'ONCE']}),
+    help: Flags.help({char: 'h'}),
+    volume: Flags.integer({description: 'New Volume'}),
+    enable: Flags.boolean({description: 'Enable the alarm?', exclusive: ['disable']}),
+    disable: Flags.boolean({description: 'Disable the alarm?', exclusive: ['enable']}),
+    start: Flags.string({description: 'Starttime as hh:mm:ss'}),
+    duration: Flags.string({description: 'Duration as hh:mm:ss'}),
+    recurrence: Flags.string({description: 'What is the recurrence of this alarm', options: ['DAILY', 'WEEKDAYS', 'ONCE']}),
     ...SonosCommandHelper.baseFlags(true),
   }
 
   static args = [{name: 'id',  description: 'Alarm ID you want to update', required: true}]
 
   async run() {
-    const {args, flags} = this.parse(AlarmUpdate)
+    const {args, flags} = await this.parse(AlarmUpdate)
 
     const id = parseInt(args.id, 10)
     if (isNaN(id) || id < 0 || id > 100000) {
