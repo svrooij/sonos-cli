@@ -11,7 +11,7 @@ export default class MusicLogin extends Command {
     ...SonosCommandHelper.baseFlags(true),
   }
 
-  async run() {
+  async run(): Promise<void> {
     const {flags} = await this.parse(MusicLogin)
     const device = await SonosCommandHelper.device(this, flags)
     let serviceId = flags.service

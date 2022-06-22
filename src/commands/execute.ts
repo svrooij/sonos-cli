@@ -29,7 +29,7 @@ export default class Execute extends Command {
     },
   ]
 
-  async run() {
+  async run(): Promise<void> {
     const {args, flags} = await this.parse(Execute)
     const device = await SonosCommandHelper.device(this, flags, args.device)
     const num = Number(args.input)

@@ -12,7 +12,7 @@ export class AlarmList extends Command {
     ...CliUx.ux.table.flags(),
   }
 
-  async run() {
+  async run(): Promise<void> {
     const {flags} = await this.parse(AlarmList)
 
     const device = await SonosCommandHelper.device(this, flags)
@@ -20,10 +20,9 @@ export class AlarmList extends Command {
     const alarms = await device.AlarmClockService.ListAndParseAlarms()
 
     if (flags['disable-all'] === true) {
-      for (const a of alarms
-      .filter(a => a.Enabled === true)) {
-        await device.AlarmClockService.PatchAlarm({ID: a.ID, Enabled: false})
-      }
+      const enabledAlarms = alarms.filter(a => a.Enabled === true)
+      const disableAll = enabledAlarms.map(async a => device.AlarmClockService.PatchAlarm({ID: a.ID, Enabled: false}))
+      await Promise.all(disableAll)
     }
 
     CliUx.ux.table(alarms as any[], {

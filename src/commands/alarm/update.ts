@@ -18,7 +18,7 @@ export default class AlarmUpdate extends Command {
 
   static args = [{name: 'id',  description: 'Alarm ID you want to update', required: true}]
 
-  async run() {
+  async run(): Promise<void> {
     const {args, flags} = await this.parse(AlarmUpdate)
 
     const id = Number.parseInt(args.id, 10)

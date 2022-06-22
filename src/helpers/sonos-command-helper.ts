@@ -65,7 +65,7 @@ export default class SonosCommandHelper {
     return new SonosDevice(config.host, 1400, config.uuid, config.name)
   }
 
-  static baseFlags(hide: boolean | undefined = undefined) {
+  static baseFlags(hide: boolean | undefined = undefined): any {
     return {
       ip: Flags.string({description: 'Load devices from IP instead of Service Discovery', hidden: hide}),
       'refresh-zones': Flags.boolean({description: 'Refresh the discovered zones', hidden: hide}),

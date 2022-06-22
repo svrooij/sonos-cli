@@ -16,7 +16,7 @@ export default class Play extends Command {
     {name: 'url', description: 'The url to play', required: true},
   ]
 
-  async run() {
+  async run(): Promise<void> {
     const {args, flags} = await this.parse(Play)
     const device = await SonosCommandHelper.device(this, flags, args.device)
 

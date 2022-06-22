@@ -15,7 +15,7 @@ export default class Queue extends Command {
       options: ['clear', 'next', 'previous']},
   ]
 
-  async run() {
+  async run(): Promise<void> {
     const {args, flags} = await this.parse(Queue)
     const device = await SonosCommandHelper.device(this, flags, args.device)
 

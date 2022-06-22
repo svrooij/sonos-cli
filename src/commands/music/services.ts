@@ -12,7 +12,7 @@ export default class MusicServices extends Command {
     ...CliUx.ux.table.flags(),
   }
 
-  async run() {
+  async run(): Promise<void> {
     const {flags} = await this.parse(MusicServices)
 
     const device = await SonosCommandHelper.device(this, flags)

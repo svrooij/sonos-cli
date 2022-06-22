@@ -15,7 +15,7 @@ export default class Control extends Command {
       options: ['play', 'pause', 'next', 'previous', 'toggle', 'stop', 'volumeup', 'volumedown', 'mute', 'unmute', 'togglemute']},
   ]
 
-  async run() {
+  async run(): Promise<void> {
     const {args, flags} = await this.parse(Control)
     const device = await SonosCommandHelper.device(this, flags, args.device)
 

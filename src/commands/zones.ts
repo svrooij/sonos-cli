@@ -18,7 +18,7 @@ export class Zones extends Command {
 
   static args = [{name: 'file'}]
 
-  async run() {
+  async run(): Promise<void> {
     const {flags} = await this.parse(Zones)
     const manager = new SonosManager()
     if (flags.ip) {
@@ -38,7 +38,7 @@ export class Zones extends Command {
       Coordinator: {header: 'Coordinator', extended: true, get: d => d.Coordinator.Name},
       CoordinatorId: {header: 'Coordinator ID', extended: true, get: d => d.Coordinator.Uuid},
     }, {
-      //printLine: this.log,
+      // printLine: this.log,
       ...flags,
     } as CliUx.Table.table.Options)
 

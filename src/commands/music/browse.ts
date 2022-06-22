@@ -12,7 +12,7 @@ export default class MusicBrowse extends Command {
     ...SonosCommandHelper.baseFlags(true),
   }
 
-  async run() {
+  async run(): Promise<void> {
     const {flags} = await this.parse(MusicBrowse)
     const device = await SonosCommandHelper.device(this, flags)
 

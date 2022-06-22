@@ -14,7 +14,7 @@ export default class Info extends Command {
     {name: 'kind', description: 'What do you want to load', required: true, options: ['attributes', 'media', 'position',  'transport', 'queue', 'volume']},
   ]
 
-  async run() {
+  async run(): Promise<void> {
     const {args, flags} = await this.parse(Info)
     const device = await SonosCommandHelper.device(this, flags, args.device)
     switch (args.kind) {
