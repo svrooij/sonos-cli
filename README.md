@@ -54,7 +54,6 @@ USAGE
 * [`sonos music:services`](#sonos-musicservices)
 * [`sonos play DEVICE URL`](#sonos-play-device-url)
 * [`sonos queue DEVICE COMMAND`](#sonos-queue-device-command)
-* [`sonos update [CHANNEL]`](#sonos-update-channel)
 * [`sonos zones [FILE]`](#sonos-zones-file)
 
 ## `sonos alarm:delete ID`
@@ -303,29 +302,6 @@ OPTIONS
 ```
 
 _See code: [src/commands/queue.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/queue.ts)_
-
-## `sonos update [CHANNEL]`
-
-update the sonos CLI
-
-```
-USAGE
-  $ sonos update [CHANNEL]
-
-OPTIONS
-  -a, --available        Install a specific version.
-  -i, --interactive      Interactively select version to install. This is ignored if a channel is provided.
-  -v, --version=version  Install a specific version.
-  --force                Force a re-download of the requested version.
-
-EXAMPLES
-  [object Object]
-  [object Object]
-  [object Object]
-  [object Object]
-```
-
-_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v3.0.0/src/commands/update.ts)_
 
 ## `sonos zones [FILE]`
 
