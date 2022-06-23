@@ -1,38 +1,36 @@
-import {Command, flags} from '@oclif/command'
+import {Command, Flags, CliUx} from '@oclif/core'
 import {SonosManager} from '@svrooij/sonos'
-import {cli} from 'cli-ux'
-import {Options} from 'cli-ux/lib/action/base'
 import {DeviceConfig} from '../models/device-config'
 
-import * as path from 'path'
+import * as path from 'node:path'
 import * as fs from 'fs-extra'
 
-export default class Zones extends Command {
+export class Zones extends Command {
   static description = 'Do device discovery'
 
   static flags = {
-    help: flags.help({char: 'h'}),
-    save: flags.boolean(),
-    ip: flags.string({description: 'Use IP instead of discovery'}),
+    help: Flags.help({char: 'h'}),
+    save: Flags.boolean(),
+    ip: Flags.string({description: 'Use IP instead of discovery'}),
     // flag with no value (-f, --force)
-    ...cli.table.flags(),
+    ...CliUx.ux.table.flags(),
   }
 
   static args = [{name: 'file'}]
 
-  async run() {
-    const {flags} = this.parse(Zones)
+  async run(): Promise<void> {
+    const {flags} = await this.parse(Zones)
     const manager = new SonosManager()
     if (flags.ip) {
       await manager.InitializeFromDevice(flags.ip)
     } else {
-      cli.action.start('Searching for sonos devices')
+      CliUx.ux.action.start('Searching for sonos devices')
       await manager.InitializeWithDiscovery(10)
     }
 
-    cli.action.stop()
+    CliUx.ux.action.stop()
 
-    cli.table(manager.Devices, {
+    CliUx.ux.table(manager.Devices as any [], {
       Name: {},
       Uuid: {header: 'Zone ID'},
       host: {header: 'IP', extended: true},
@@ -40,9 +38,9 @@ export default class Zones extends Command {
       Coordinator: {header: 'Coordinator', extended: true, get: d => d.Coordinator.Name},
       CoordinatorId: {header: 'Coordinator ID', extended: true, get: d => d.Coordinator.Uuid},
     }, {
-      printLine: this.log,
+      // printLine: this.log,
       ...flags,
-    } as Options)
+    } as CliUx.Table.table.Options)
 
     if (flags.save) {
       const dir = this.config.dataDir.replace(/@/, '')
@@ -53,6 +51,7 @@ export default class Zones extends Command {
       await fs.ensureDir(dir)
       await fs.writeJSON(filename, devices)
     }
+
     manager.CancelSubscription()
     this.exit()
   }

@@ -1,5 +1,4 @@
-import Command, {flags} from '@oclif/command'
-import {cli} from 'cli-ux'
+import {Command, Flags, CliUx} from '@oclif/core'
 import SonosCommandHelper from '../helpers/sonos-command-helper'
 
 export default class Execute extends Command {
@@ -14,7 +13,7 @@ export default class Execute extends Command {
   ]
 
   static flags = {
-    help: flags.help({char: 'h'}),
+    help: Flags.help({char: 'h'}),
     ...SonosCommandHelper.baseFlags(true),
   }
 
@@ -30,17 +29,17 @@ export default class Execute extends Command {
     },
   ]
 
-  async run() {
-    const {args, flags} = this.parse(Execute)
+  async run(): Promise<void> {
+    const {args, flags} = await this.parse(Execute)
     const device = await SonosCommandHelper.device(this, flags, args.device)
     const num = Number(args.input)
-    const commandArgs = isNaN(num) ? args.input : num
+    const commandArgs = Number.isNaN(num) ? args.input : num
     const result = await device.ExecuteCommand(args.command, commandArgs)
     if (typeof result === 'boolean') {
       this.log('Executed %s success:%s', args.command, result)
     } else {
       this.log('Executed %s result:', args.command)
-      cli.styledJSON(result)
+      CliUx.ux.styledJSON(result)
     }
   }
 }

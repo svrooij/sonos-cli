@@ -1,34 +1,33 @@
-import Command, {flags} from '@oclif/command'
-import {cli} from 'cli-ux'
+import {Command, Flags, CliUx} from '@oclif/core'
 import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
 export default class MusicBrowse extends Command {
   static description = 'Browse music in an external music service'
 
   static flags = {
-    help: flags.help({char: 'h'}),
-    service: flags.integer({description: 'Music Service ID'}),
-    root: flags.string({description: 'Start browsing at this tag.', default: 'root'}),
-    count: flags.integer({default: 10}),
+    help: Flags.help({char: 'h'}),
+    service: Flags.integer({description: 'Music Service ID'}),
+    root: Flags.string({description: 'Start browsing at this tag.', default: 'root'}),
+    count: Flags.integer({default: 10}),
     ...SonosCommandHelper.baseFlags(true),
   }
 
-  async run() {
-    const {flags} = this.parse(MusicBrowse)
+  async run(): Promise<void> {
+    const {flags} = await this.parse(MusicBrowse)
     const device = await SonosCommandHelper.device(this, flags)
 
     let serviceId = flags.service
     if (!serviceId) {
       const services = await device.MusicServicesService.ListAndParseAvailableServices(true)
-      cli.table(
-        services,
+      CliUx.ux.table(
+        services as any[],
         {
-          Id: { },
-          Name: { },
+          Id: {},
+          Name: {},
         })
-      const answer = await cli.prompt('Browse which service?', {required: true})
+      const answer = await CliUx.ux.prompt('Browse which service?', {required: true})
 
-      serviceId = parseInt(answer, 10)
+      serviceId = Number.parseInt(answer, 10)
     }
 
     const client = await device.MusicServicesClient(serviceId)
@@ -45,16 +44,16 @@ export default class MusicBrowse extends Command {
             index: i + 1,
           }
         })
-        cli.table(items, {
+        CliUx.ux.table(items, {
           index: {header: 'Choice'},
           title: {},
           id: {},
         })
-        const answer = await cli.prompt('Browse which item?')
-        query = items.find(i => i.index === parseInt(answer, 10))?.id ?? 'root'
+        const answer = await CliUx.ux.prompt('Browse which item?')
+        query = items.find(i => i.index === Number.parseInt(answer, 10))?.id ?? 'root'
       } else if (results.mediaMetadata) {
-        cli.info('Got songs %s', query)
-        cli.table(results.mediaMetadata, {
+        CliUx.ux.info('Got songs %s', query)
+        CliUx.ux.table(results.mediaMetadata as any[], {
           id: {},
           title: {},
           itemType: {},

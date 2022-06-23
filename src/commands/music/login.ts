@@ -1,49 +1,48 @@
-import Command, {flags} from '@oclif/command'
-import {cli} from 'cli-ux'
+import {Command, Flags, CliUx} from '@oclif/core'
 import SonosCommandHelper from '../../helpers/sonos-command-helper'
 
 export default class MusicLogin extends Command {
   static description = 'Login to your favorite music service'
 
   static flags = {
-    help: flags.help({char: 'h'}),
+    help: Flags.help({char: 'h'}),
     // flag with a value (-n, --name=VALUE)
-    service: flags.integer({description: 'Music Service ID'}),
+    service: Flags.integer({description: 'Music Service ID'}),
     ...SonosCommandHelper.baseFlags(true),
   }
 
-  async run() {
-    const {flags} = this.parse(MusicLogin)
+  async run(): Promise<void> {
+    const {flags} = await this.parse(MusicLogin)
     const device = await SonosCommandHelper.device(this, flags)
     let serviceId = flags.service
     if (!serviceId) {
       const services = await device.MusicServicesService.ListAndParseAvailableServices(true)
-      cli.table(
-        services.filter(s => s.Policy.Auth === 'AppLink' || s.Policy.Auth === 'DeviceLink'),
+      CliUx.ux.table(
+        services.filter(s => s.Policy.Auth === 'AppLink' || s.Policy.Auth === 'DeviceLink') as any[],
         {
-          Id: { },
-          Name: { },
+          Id: {},
+          Name: {},
         })
-      const answer = await cli.prompt('Login to which service?', {required: true})
+      const answer = await CliUx.ux.prompt('Login to which service?', {required: true})
 
-      serviceId = parseInt(answer, 10)
+      serviceId = Number.parseInt(answer, 10)
     }
 
     const client = await device.MusicServicesClient(serviceId)
     const link = await client.GetLoginLink()
 
-    cli.info(`The login page for ${serviceId} will now be opened`)
+    CliUx.ux.info(`The login page for ${serviceId} will now be opened`)
 
     if (link.showLinkCode) {
-      cli.info('Enter \'%s\' on the login page', link.linkCode)
+      CliUx.ux.info('Enter \'%s\' on the login page', link.linkCode)
     }
 
-    cli.open(link.regUrl)
-    await cli.anykey('Did you login? Press Enter to continue.')
+    CliUx.ux.open(link.regUrl)
+    await CliUx.ux.anykey('Did you login? Press Enter to continue.')
 
     const credentials = await client.GetDeviceAuthToken(link.linkCode)
-    cli.info('Login succeeded! The credentials are saved in the speaker.')
+    CliUx.ux.info('Login succeeded! The credentials are saved in the speaker.')
 
-    cli.styledJSON(credentials)
+    CliUx.ux.styledJSON(credentials)
   }
 }

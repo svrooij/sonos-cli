@@ -24,14 +24,16 @@ This sonos cli, is just a cli wrapper around the [sonos-ts](https://github.com/s
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
 ```sh-session
 $ npm install -g @svrooij/sonos-cli
 $ sonos COMMAND
 running command...
 $ sonos (-v|--version|version)
-@svrooij/sonos-cli/0.0.0-development win32-x64 node-v16.8.0
+@svrooij/sonos-cli/0.0.0-development win32-x64 node-v16.15.1
 $ sonos --help [COMMAND]
 USAGE
   $ sonos COMMAND
@@ -51,7 +53,7 @@ USAGE
 * [`sonos music:login`](#sonos-musiclogin)
 * [`sonos music:services`](#sonos-musicservices)
 * [`sonos play DEVICE URL`](#sonos-play-device-url)
-* [`sonos update [CHANNEL]`](#sonos-update-channel)
+* [`sonos queue DEVICE COMMAND`](#sonos-queue-device-command)
 * [`sonos zones [FILE]`](#sonos-zones-file)
 
 ## `sonos alarm:delete ID`
@@ -66,7 +68,7 @@ ARGUMENTS
   ID  The ID of the alarm you want to delete
 
 OPTIONS
-  -h, --help  show CLI help
+  -h, --help  Show CLI help.
 ```
 
 _See code: [src/commands/alarm/delete.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/alarm/delete.ts)_
@@ -80,7 +82,7 @@ USAGE
   $ sonos alarm:list
 
 OPTIONS
-  -h, --help              show CLI help
+  -h, --help              Show CLI help.
   -x, --extended          show extra columns
   --columns=columns       only show provided columns (comma-separated)
   --csv                   output is csv format [alias: --output=csv]
@@ -105,7 +107,7 @@ ARGUMENTS
   ID  Alarm ID you want to update
 
 OPTIONS
-  -h, --help                        show CLI help
+  -h, --help                        Show CLI help.
   --disable                         Disable the alarm?
   --duration=duration               Duration as hh:mm:ss
   --enable                          Enable the alarm?
@@ -126,10 +128,12 @@ USAGE
 
 ARGUMENTS
   DEVICE   Name or uuid of player
-  COMMAND  (play|pause|next|previous|toggle|stop|volumeup|volumedown) What command do you want to send
+
+  COMMAND  (play|pause|next|previous|toggle|stop|volumeup|volumedown|mute|unmute|togglemute) What command do you want to
+           send
 
 OPTIONS
-  -h, --help       show CLI help
+  -h, --help       Show CLI help.
   --ip=ip          Load devices from IP instead of Service Discovery
   --refresh-zones  Refresh the discovered zones
   --save-zones     Save the discovered zones
@@ -151,7 +155,7 @@ ARGUMENTS
   INPUT    Optional input for command
 
 OPTIONS
-  -h, --help  show CLI help
+  -h, --help  Show CLI help.
 
 EXAMPLES
   sonos execute {device} AVTransportService.Next
@@ -178,7 +182,7 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.18/src/commands/help.ts)_
 
 ## `sonos info DEVICE KIND`
 
@@ -190,10 +194,10 @@ USAGE
 
 ARGUMENTS
   DEVICE  Name or uuid of player
-  KIND    (attributes|media|position|queue|volume) What do you want to load
+  KIND    (attributes|media|position|transport|queue|volume) What do you want to load
 
 OPTIONS
-  -h, --help       show CLI help
+  -h, --help       Show CLI help.
   --ip=ip          Load devices from IP instead of Service Discovery
   --refresh-zones  Refresh the discovered zones
   --save-zones     Save the discovered zones
@@ -210,7 +214,7 @@ USAGE
   $ sonos music:browse
 
 OPTIONS
-  -h, --help         show CLI help
+  -h, --help         Show CLI help.
   --count=count      [default: 10]
   --root=root        [default: root] Start browsing at this tag.
   --service=service  Music Service ID
@@ -227,7 +231,7 @@ USAGE
   $ sonos music:login
 
 OPTIONS
-  -h, --help         show CLI help
+  -h, --help         Show CLI help.
   --service=service  Music Service ID
 ```
 
@@ -242,7 +246,7 @@ USAGE
   $ sonos music:services
 
 OPTIONS
-  -h, --help              show CLI help
+  -h, --help              Show CLI help.
   -x, --extended          show extra columns
   --columns=columns       only show provided columns (comma-separated)
   --csv                   output is csv format [alias: --output=csv]
@@ -269,7 +273,7 @@ ARGUMENTS
   URL     The url to play
 
 OPTIONS
-  -h, --help       show CLI help
+  -h, --help       Show CLI help.
   --ip=ip          Load devices from IP instead of Service Discovery
   --refresh-zones  Refresh the discovered zones
   --save-zones     Save the discovered zones
@@ -278,16 +282,26 @@ OPTIONS
 
 _See code: [src/commands/play.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/play.ts)_
 
-## `sonos update [CHANNEL]`
+## `sonos queue DEVICE COMMAND`
 
-update the sonos CLI
+Manipulates the queue on your speaker
 
 ```
 USAGE
-  $ sonos update [CHANNEL]
+  $ sonos queue DEVICE COMMAND
+
+ARGUMENTS
+  DEVICE   Name or uuid of player
+  COMMAND  (clear|next|previous) What command do you want to send
+
+OPTIONS
+  -h, --help       Show CLI help.
+  --ip=ip          Load devices from IP instead of Service Discovery
+  --refresh-zones  Refresh the discovered zones
+  --save-zones     Save the discovered zones
 ```
 
-_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v1.3.10/src/commands/update.ts)_
+_See code: [src/commands/queue.ts](https://github.com/svrooij/sonos-cli/blob/v0.0.0-development/src/commands/queue.ts)_
 
 ## `sonos zones [FILE]`
 
@@ -298,7 +312,7 @@ USAGE
   $ sonos zones [FILE]
 
 OPTIONS
-  -h, --help              show CLI help
+  -h, --help              Show CLI help.
   -x, --extended          show extra columns
   --columns=columns       only show provided columns (comma-separated)
   --csv                   output is csv format [alias: --output=csv]
