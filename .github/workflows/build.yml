@@ -4,12 +4,25 @@ on:
   push:
     branches:
       - master
+      - main
       - beta
-    paths-ignore:
-      - 'README.md'
+    paths:
+      - 'src/**/*.ts'
+      - 'test/**/*.ts'
+      - 'package*.json'
+      - '.es*'
+      - '.github/workflows/*.yml'
   pull_request:
-    paths-ignore:
-      - 'README.md'
+    branches:
+      - master
+      - main
+      - beta
+    paths:
+      - 'src/**/*.ts'
+      - 'test/**/*.ts'
+      - 'package*.json'
+      - '.es*'
+      - '.github/workflows/*.yml'
 
 jobs:
   test:
