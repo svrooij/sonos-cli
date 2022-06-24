@@ -1,4 +1,7 @@
 @svrooij/sonos-cli
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 ==================
 
 Control your sonos players right from the console. This cli is started as an experiment, so it may contain bugs. If you found some bugs, please [report][link_issues].
@@ -358,3 +361,24 @@ Tests aren't implemented everywhere, if you feel like it send me a pull request.
 [link_sonos-mqtt]: https://svrooij.io/sonos2mqtt
 [link_sonos-typescript]: https://svrooij.io/node-sonos-ts
 [link_sponsor]: https://github.com/sponsors/svrooij
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://svrooij.io/"><img src="https://avatars.githubusercontent.com/u/1292510?v=4?s=120" width="120px;" alt=""/><br /><sub><b>Stephan van Rooij</b></sub></a><br /><a href="https://github.com/svrooij/sonos-cli/commits?author=svrooij" title="Code">💻</a> <a href="https://github.com/svrooij/sonos-cli/commits?author=svrooij" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/mdouglass"><img src="https://avatars.githubusercontent.com/u/5410142?v=4?s=120" width="120px;" alt=""/><br /><sub><b>Matthew Douglass</b></sub></a><br /><a href="https://github.com/svrooij/sonos-cli/commits?author=mdouglass" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
