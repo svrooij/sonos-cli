@@ -341,25 +341,6 @@ Tests aren't implemented everywhere, if you feel like it send me a pull request.
 
 [Oclif](https://oclif.io/) is a cli framework created by the guys (and girls) from heroku. When starting this library it was the want that seems to have the most featured I wanted for a cli framework. This wasn't a thourogh research, I just picked the one I liked.
 
-[badge_discord]: https://img.shields.io/discord/782374564054564875?style=flat-square
-[badge_issues]: https://img.shields.io/github/issues/svrooij/sonos-cli?style=flat-square
-[badge_npm]: https://img.shields.io/npm/v/@svrooij/sonos-cli?style=flat-square
-[badge_sonos-cli]: https://img.shields.io/badge/sonos-cli-blue?style=flat-square
-[badge_sonos-docs]: https://img.shields.io/badge/sonos-api-blue?style=flat-square
-[badge_sonos-mqtt]: https://img.shields.io/badge/sonos-mqtt-blue?style=flat-square
-[badge_sonos-typescript]: https://img.shields.io/badge/sonos-typescript-blue?style=flat-square
-[badge_sponsor]: https://img.shields.io/badge/Sponsor-on%20Github-red?style=flat-square
-
-[link_build]: https://github.com/svrooij/node-sonos-ts/actions
-[link_discord]: https://discord.gg/VMtG6Ft36J
-[link_issues]: https://github.com/svrooij/sonos-cli/issues
-[link_npm]: https://www.npmjs.com/package/@svrooij/sonos-cli
-[link_sonos-cli]: https://github.com/svrooij/sonos-cli
-[link_sonos-docs]: https://svrooij.io/sonos-api-docs
-[link_sonos-mqtt]: https://svrooij.io/sonos2mqtt
-[link_sonos-typescript]: https://svrooij.io/node-sonos-ts
-[link_sponsor]: https://github.com/sponsors/svrooij
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -380,3 +361,42 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+### Commit style
+
+This repository will automatically create a new release if your commit message follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+
+```plain
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Bugfix sample: `fix: Play command did not work`
+
+Feature sample: `feat: Added command x and y`
+
+### PR branch
+
+Always create your pull request against the `beta` branch. I will release this branch to the main branch at a regular interval or when we build some awesome new feature.
+
+[badge_discord]: https://img.shields.io/discord/782374564054564875?style=flat-square
+[badge_issues]: https://img.shields.io/github/issues/svrooij/sonos-cli?style=flat-square
+[badge_npm]: https://img.shields.io/npm/v/@svrooij/sonos-cli?style=flat-square
+[badge_sonos-cli]: https://img.shields.io/badge/sonos-cli-blue?style=flat-square
+[badge_sonos-docs]: https://img.shields.io/badge/sonos-api-blue?style=flat-square
+[badge_sonos-mqtt]: https://img.shields.io/badge/sonos-mqtt-blue?style=flat-square
+[badge_sonos-typescript]: https://img.shields.io/badge/sonos-typescript-blue?style=flat-square
+[badge_sponsor]: https://img.shields.io/badge/Sponsor-on%20Github-red?style=flat-square
+
+[link_build]: https://github.com/svrooij/node-sonos-ts/actions
+[link_discord]: https://discord.gg/VMtG6Ft36J
+[link_issues]: https://github.com/svrooij/sonos-cli/issues
+[link_npm]: https://www.npmjs.com/package/@svrooij/sonos-cli
+[link_sonos-cli]: https://github.com/svrooij/sonos-cli
+[link_sonos-docs]: https://svrooij.io/sonos-api-docs
+[link_sonos-mqtt]: https://svrooij.io/sonos2mqtt
+[link_sonos-typescript]: https://svrooij.io/node-sonos-ts
+[link_sponsor]: https://github.com/sponsors/svrooij
