@@ -1,8 +1,4 @@
-@svrooij/sonos-cli
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-==================
+# @svrooij/sonos-cli
 
 Control your sonos players right from the console. This cli is started as an experiment, so it may contain bugs. If you found some bugs, please [report][link_issues].
 
@@ -19,7 +15,9 @@ Install `npm i -g @svrooij/sonos-cli` and start using, see below.
 [![Downloads/week](https://img.shields.io/npm/dw/@svrooij/sonos-cli.svg?style=flat-square)](https://npmjs.org/package/@svrooij/sonos-cli)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg?style=flat-square)](https://oclif.io)
 [![License](https://img.shields.io/npm/l/@svrooij/sonos-cli.svg?style=flat-square)](https://github.com/svrooij/sonos-cli/blob/master/package.json)
-[![Support me on Github][badge_sponsor]][link_sponsor]
+[![Support me on Github][badge_sponsor]][link_sponsor] <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This sonos cli, is just a cli wrapper around the [sonos-ts](https://github.com/svrooij/node-sonos-ts) library. I could use some support in both :wink:. If you like this library please tell me on [twitter](https://twitter.com/svrooij), or start [sponsoring][link_sponsor] me.
 
