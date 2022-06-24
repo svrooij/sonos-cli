@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [16, 18, 14]
+        node: [16, 18]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -61,7 +61,7 @@ jobs:
         run: npm ci
 
       - name: Build library
-        run: npx tsc -b
+        run: npm run readme
 
       - uses: svrooij/secret-gate-action@v1
         id: mygate

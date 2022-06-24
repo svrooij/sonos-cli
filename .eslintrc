@@ -8,6 +8,8 @@
     "no-await-in-loop": "warn",
     "unicorn/no-useless-undefined": "off",
     "unicorn/no-static-only-class": "off",
-    "node/no-missing-import": "warn" 
+    "node/no-missing-import": "warn",
+    "unicorn/prefer-node-protocol":"warn",
+     "unicorn/import-style":"warn"
   }
 }

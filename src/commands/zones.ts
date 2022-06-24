@@ -2,7 +2,7 @@ import {Command, Flags, CliUx} from '@oclif/core'
 import {SonosManager} from '@svrooij/sonos'
 import {DeviceConfig} from '../models/device-config'
 
-import * as path from 'node:path'
+import * as path from 'path'
 import * as fs from 'fs-extra'
 
 export class Zones extends Command {

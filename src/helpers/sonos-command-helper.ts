@@ -3,7 +3,9 @@ import {SonosDevice, SonosManager} from '@svrooij/sonos'
 import {Command, Flags, CliUx} from '@oclif/core'
 
 import * as fs from 'fs-extra'
-import * as path from 'node:path'
+// 'node:path' doesn't work well with oclif
+// See https://github.com/svrooij/sonos-cli/runs/7032310548?check_suite_focus=true
+import * as path from 'path'
 
 const stringCompare = function (a: string, b: string): boolean {
   return a.localeCompare(b, undefined, {sensitivity: 'base'}) === 0
@@ -20,8 +22,6 @@ export default class SonosCommandHelper {
   static async device(command: Command, options: Options, device?: string): Promise<SonosDevice> {
     const filename = path.join(command.config.dataDir.replace(/@/, ''), 'devices.json')
     const fileExists = await fs.pathExists(filename)
-    // cli.log('Device file: %s exists %o', filename, fileExists ? 'Yes' : 'No')
-    // cli.styledJSON(options)
 
     let devices: DeviceConfig[] | undefined
     if (options['refresh-zones'] === true || !fileExists) {
