@@ -9,11 +9,23 @@ on:
       - master
       - main
       - beta
+    paths:
+      - 'src/**/*.ts'
+      - 'test/**/*.ts'
+      - 'package*.json'
+      - '.es*'
+      - '.github/workflows/*.yml'
   pull_request:
     branch:
       - master
       - main
       - beta
+    paths:
+      - 'src/**/*.ts'
+      - 'test/**/*.ts'
+      - 'package*.json'
+      - '.es*'
+      - '.github/workflows/*.yml'
 jobs:
   Scan-Build:
     # Scan runs on ubuntu, mac and windows
