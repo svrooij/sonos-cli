@@ -22,6 +22,7 @@ Install `npm i -g @svrooij/sonos-cli` and start using, see below.
 This sonos cli, is just a cli wrapper around the [sonos-ts](https://github.com/svrooij/node-sonos-ts) library. I could use some support in both :wink:. If you like this library please tell me on [twitter](https://twitter.com/svrooij), or start [sponsoring][link_sponsor] me.
 
 <!-- toc -->
+* [@svrooij/sonos-cli](#svrooijsonos-cli)
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
@@ -34,7 +35,7 @@ $ npm install -g @svrooij/sonos-cli
 $ sonos COMMAND
 running command...
 $ sonos (-v|--version|version)
-@svrooij/sonos-cli/0.0.0-development win32-x64 node-v16.15.1
+@svrooij/sonos-cli/0.0.0-development darwin-arm64 node-v16.13.1
 $ sonos --help [COMMAND]
 USAGE
   $ sonos COMMAND
@@ -130,8 +131,8 @@ USAGE
 ARGUMENTS
   DEVICE   Name or uuid of player
 
-  COMMAND  (play|pause|next|previous|toggle|stop|volumeup|volumedown|mute|unmute|togglemute) What command do you want to
-           send
+  COMMAND  (play|pause|next|previous|toggle|stop|volumeup|volumedown|mute|unmute|togglemute|repeatall|repeatone|repeatof
+           f|togglerepeat|shuffleon|shuffleoff|toggleshuffle) What command do you want to send
 
 OPTIONS
   -h, --help       Show CLI help.
@@ -195,7 +196,7 @@ USAGE
 
 ARGUMENTS
   DEVICE  Name or uuid of player
-  KIND    (attributes|media|position|transport|queue|volume) What do you want to load
+  KIND    (attributes|media|settings|position|transport|queue|volume|repeat|shuffle) What do you want to load
 
 OPTIONS
   -h, --help       Show CLI help.

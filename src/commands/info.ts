@@ -11,7 +11,7 @@ export default class Info extends Command {
 
   static args = [
     {name: 'device', required: true, description: 'Name or uuid of player'},
-    {name: 'kind', description: 'What do you want to load', required: true, options: ['attributes', 'media', 'position',  'transport', 'queue', 'volume']},
+    {name: 'kind', description: 'What do you want to load', required: true, options: ['attributes', 'media', 'settings', 'position',  'transport', 'queue', 'volume', 'repeat', 'shuffle']},
   ]
 
   async run(): Promise<void> {
@@ -35,6 +35,15 @@ export default class Info extends Command {
       break
     case 'volume':
       this.log('Current volume %d', (await device.RenderingControlService.GetVolume({InstanceID: 0, Channel: 'Master'})).CurrentVolume)
+      break
+    case 'settings':
+      CliUx.ux.styledJSON(await device.AVTransportService.GetTransportSettings({InstanceID: 0}))
+      break
+    case 'repeat':
+      CliUx.ux.styledJSON({repeat: await device.GetRepeat()})
+      break
+    case 'shuffle':
+      CliUx.ux.styledJSON({shuffle: await device.GetShuffle()})
       break
     }
 
