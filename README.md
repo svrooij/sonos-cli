@@ -379,6 +379,8 @@ Bugfix sample: `fix: Play command did not work`
 
 Feature sample: `feat: Added command x and y`
 
+This repository will auto release a new version if commits starting with either `fix: ` or `feat: ` are detected. Make sure this is in your commit to provide a fast release of your fix.
+
 ### PR branch
 
 Always create your pull request against the `beta` branch. I will release this branch to the main branch at a regular interval or when we build some awesome new feature.
