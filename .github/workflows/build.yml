@@ -23,6 +23,7 @@ on:
       - 'package*.json'
       - '.es*'
       - '.github/workflows/*.yml'
+  workflow_dispatch:
 
 jobs:
   test:
